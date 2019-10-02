@@ -11,6 +11,8 @@ namespace Shelter.shared
             {
                 Name = "World's best virtual animal shelter"
             };
+
+            myShelter.Animals = new List<>(Animal);
         }
     }
     
@@ -19,4 +21,6 @@ namespace Shelter.shared
         public ICollection<Employee> Employees {get; set;}
         public ICollection<Animal> Animals {get; set;}
     }
+
+    
 }
