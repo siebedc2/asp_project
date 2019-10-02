@@ -16,4 +16,17 @@ namespace Shelter.shared
         public ICollection<Employee> Employees {get; set;}
         public ICollection<Animal> Animals {get; set;}
     }
+
+    public class Employee {
+        public string Name { get; set; }
+    }
+
+    public class Animal {
+        public string name { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public bool IsChecked { get; set; }
+        public bool KidFriendly { get; set; }
+    }
+
+
 }
