@@ -12,7 +12,7 @@ namespace Shelter.shared
                 Name = "World's best virtual animal shelter"
             };
 
-            myShelter.Animals = new List<>(Animal);
+            myShelter.Animals = new List<Animal>();
         }
     }
     
