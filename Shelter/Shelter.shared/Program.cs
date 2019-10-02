@@ -7,7 +7,10 @@ namespace Shelter.shared
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var myShelter = new Shelter()
+            {
+                Name = "World's best virtual animal shelter"
+            };
         }
     }
     
