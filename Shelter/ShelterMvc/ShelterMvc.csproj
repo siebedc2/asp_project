@@ -6,7 +6,7 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\Shelter\Shelter.shared\Shelter.shared.csproj" />
+    <ProjectReference Include="..\Shelter.shared\Shelter.shared.csproj" />
   </ItemGroup>
 
 </Project>
