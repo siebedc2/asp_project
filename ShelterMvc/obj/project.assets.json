@@ -8,23 +8,23 @@
     ".NETCoreApp,Version=v3.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Arne\\.nuget\\packages\\": {},
+    "C:\\Users\\Siebe\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Bureaublad\\Thomas More\\Sem 5\\ASP_NET\\asp_project\\ShelterMvc\\ShelterMvc.csproj",
+      "projectUniqueName": "C:\\Users\\Siebe\\OneDrive - Thomas More\\Jaar 3\\Semester 1\\ASP.NET\\asp_project\\ShelterMvc\\ShelterMvc.csproj",
       "projectName": "ShelterMvc",
-      "projectPath": "D:\\Bureaublad\\Thomas More\\Sem 5\\ASP_NET\\asp_project\\ShelterMvc\\ShelterMvc.csproj",
-      "packagesPath": "C:\\Users\\Arne\\.nuget\\packages\\",
-      "outputPath": "D:\\Bureaublad\\Thomas More\\Sem 5\\ASP_NET\\asp_project\\ShelterMvc\\obj\\",
+      "projectPath": "C:\\Users\\Siebe\\OneDrive - Thomas More\\Jaar 3\\Semester 1\\ASP.NET\\asp_project\\ShelterMvc\\ShelterMvc.csproj",
+      "packagesPath": "C:\\Users\\Siebe\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Siebe\\OneDrive - Thomas More\\Jaar 3\\Semester 1\\ASP.NET\\asp_project\\ShelterMvc\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Arne\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Siebe\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.0"

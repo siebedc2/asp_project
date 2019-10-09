@@ -22,17 +22,47 @@ namespace Shelter.shared
         public ICollection<Animal> Animals {get; set;}
     }
 
-
-    public class Employee {
+    // Begin Employee
+    public abstract class Employee {
         public string Name { get; set; }
     }
 
-    public class Animal {
+    public class Manager:Employee {
+        // Properties manager
+    }
+
+    public class Caretaker:Employee {
+        // Properties caretaker
+    }
+
+    public class Administrator:Employee {
+        // Properties administrator
+    }
+    // End Employee
+
+    // Begin Animal
+    public abstract class Animal {
         public string name { get; set; }
         public DateTime DateOfBirth { get; set; }
         public bool IsChecked { get; set; }
         public bool KidFriendly { get; set; }
     }
+
+    public class Dog:Animal {
+        public string race { get; set; }
+        public bool declawed { get; set; }
+    }
+
+    public class Cat:Animal {
+        public string race { get; set; }
+        public bool barker { get; set; }
+    }
+
+    public class Other:Animal {
+        public string description { get; set; }
+        public string kind { get; set; }
+    }
+    // End Animal
 
 
 
