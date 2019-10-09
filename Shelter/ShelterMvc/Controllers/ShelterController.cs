@@ -20,7 +20,7 @@ namespace ShelterMvc.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(new ShelterIndexModel { Animals = ShelterIndexModel.Animal });
         }
 
         public IActionResult Privacy()
