@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ShelterMvc.Models;
+using Shelter.shared;
 
 namespace ShelterMvc.Controllers
 {
@@ -20,7 +21,10 @@ namespace ShelterMvc.Controllers
 
         public IActionResult Index()
         {
-            return View(new ShelterIndexModel { Animals = ShelterIndexModel.Animal });
+            var Animals = new List<Animal>();
+            Animals.Add(new Dog() { name = "Brutus", IsChecked = true, KidFriendly = true });
+            Animals.Add(new Cat() { name = "Minoes", IsChecked = true, KidFriendly = true });
+            return View(Animals);
         }
 
         public IActionResult Privacy()
