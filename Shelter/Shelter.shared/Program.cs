@@ -42,25 +42,26 @@ namespace Shelter.shared
 
     // Begin Animal
     public abstract class Animal {
-        public string name { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
         public DateTime DateOfBirth { get; set; }
         public bool IsChecked { get; set; }
         public bool KidFriendly { get; set; }
     }
 
     public class Dog:Animal {
-        public string race { get; set; }
-        public bool declawed { get; set; }
+        public string Race { get; set; }
+        public bool Declawed { get; set; }
     }
 
     public class Cat:Animal {
-        public string race { get; set; }
-        public bool barker { get; set; }
+        public string Race { get; set; }
+        public bool Barker { get; set; }
     }
 
     public class Other:Animal {
-        public string description { get; set; }
-        public string kind { get; set; }
+        public string Description { get; set; }
+        public string Kind { get; set; }
     }
     // End Animal
 
