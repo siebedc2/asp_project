@@ -54,7 +54,8 @@ namespace ShelterMvc.Controllers
             {
                 return NotFound();
             }
-            ShelterIndexModel.Shelter.Animals.Remove(targetAnimal);
+            var newName = Request.Form["name"];
+            ShelterIndexModel.Shelter.Animals.FirstOrDefault(x => x.Id == id).Name = newName;
             return RedirectToAction(nameof(Index));
 
         }

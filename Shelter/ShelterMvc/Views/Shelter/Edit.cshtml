@@ -4,8 +4,9 @@
     ViewData["Title"] = Model.Name;
 }
 
-<form action="">
+<form asp-controller="Shelter" asp-action="DoEdit">
+    <input asp-for="Id" type="hidden">
     <!-- Show the name -->
-    <input type="text" value=@Model.Name>
+    <input type="text" name="name" value=@Model.Name>
     <input type="submit" value="Edit">
 </form>
