@@ -5,6 +5,7 @@
 
 <div class="text-center">
     <h1 class="display-4">Animal List:</h1>
+    <a asp-controller="Shelter" asp-action="Add">Add an animal</a>
     <ul>
         @foreach (var animal in Model.Animals)
         {
