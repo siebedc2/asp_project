@@ -36,6 +36,29 @@ namespace ShelterMvc.Controllers
             return View(targetAnimal);
         }
 
+        public IActionResult Edit(int id)
+        {
+            var targetAnimal = ShelterIndexModel.Shelter.Animals.FirstOrDefault(x => x.Id == id);
+            if (targetAnimal == default(Animal))
+            {
+                return NotFound();
+            }
+            return View(targetAnimal);
+        }
+
+        [HttpPost]
+        public IActionResult DoEdit(int id)
+        {
+            var targetAnimal = ShelterIndexModel.Shelter.Animals.FirstOrDefault(x => x.Id == id);
+            if (targetAnimal == default(Animal))
+            {
+                return NotFound();
+            }
+            ShelterIndexModel.Shelter.Animals.Remove(targetAnimal);
+            return RedirectToAction(nameof(Index));
+
+        }
+
         public IActionResult Delete(int id)
         {
             var targetAnimal = ShelterIndexModel.Shelter.Animals.FirstOrDefault(x => x.Id == id);
