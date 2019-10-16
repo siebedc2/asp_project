@@ -6,6 +6,32 @@ namespace ShelterMvc.Models
 {
     public class ShelterIndexModel
     {
-        public List<Animal> Animals { get; set; } //uses the Animal class from Shelter.shared namespace
+        private static bool _isInitialized = false;
+        private static Shelter.shared.Shelter _animal = null;
+
+        private static void Initialize() {
+            if (!_isInitialized) {
+                var animal = new Shelter.shared.Shelter() {
+                    Animals = new List<Animal> {
+                        new Dog() { name = "Brutus", IsChecked = true, KidFriendly = true },
+                        new Cat() { name = "Minoes", IsChecked = true, KidFriendly = true }
+                    }
+                };
+            
+            _animal = animal;
+            _isInitialized = true;
+            
+            }
+
+        }
+
+        public static Shelter.shared.Shelter Shelter {
+            get {
+                Initialize();
+                return _animal;
+            }
+        }
+      
+        
     }
 }
