@@ -21,15 +21,41 @@ namespace ShelterMvc.Controllers
 
         public IActionResult Index()
         {
-            var Animals = new List<Animal>();
-            Animals.Add(new Dog() { name = "Brutus", IsChecked = true, KidFriendly = true });
-            Animals.Add(new Cat() { name = "Minoes", IsChecked = true, KidFriendly = true });
-            return View(Animals);
+            
+            return View(ShelterIndexModel.Shelter);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Detail(int id)
         {
-            return View();
+            var targetAnimal = ShelterIndexModel.Shelter.Animals.FirstOrDefault(x => x.Id == id);
+            if (targetAnimal == default(Animal))
+            {
+                return NotFound();
+            }
+            return View(targetAnimal);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var targetAnimal = ShelterIndexModel.Shelter.Animals.FirstOrDefault(x => x.Id == id);
+            if (targetAnimal == default(Animal))
+            {
+                return NotFound();
+            }
+            return View(targetAnimal);
+        }
+
+        [HttpPost]
+        public IActionResult DoDelete(int id)
+        {
+            var targetAnimal = ShelterIndexModel.Shelter.Animals.FirstOrDefault(x => x.Id == id);
+            if (targetAnimal == default(Animal))
+            {
+                return NotFound();
+            }
+            ShelterIndexModel.Shelter.Animals.Remove(targetAnimal);
+            return RedirectToAction(nameof(Index));
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
