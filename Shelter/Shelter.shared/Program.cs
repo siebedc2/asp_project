@@ -19,7 +19,7 @@ namespace Shelter.shared
     public class Shelter {
         public string Name {get; set;}
         public ICollection<Employee> Employees {get; set;}
-        public ICollection<Animal> Animals {get; set;}
+        public List<Animal> Animals {get; set;}
     }
 
     // Begin Employee
