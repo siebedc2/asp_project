@@ -1,0 +1,8 @@
+@model Shelter.shared.Animal
+
+<p>Are you sure you want to set free<em>@Model.Name</em>? </p>
+
+<form asp-controller="Shelter" asp-action="DoDelete">
+    <input asp-for="Id" type="hidden">
+    <button type="submit">Delete</button>
+</form>
