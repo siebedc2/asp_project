@@ -10,6 +10,7 @@ using Shelter.shared;
 
 namespace ShelterMvc.Controllers
 {
+   
     public class ShelterController : Controller
     {
         private readonly ILogger<ShelterController> _logger;

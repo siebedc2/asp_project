@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 
 namespace Shelter.shared{
+
+    
     public abstract class Animal {
         public int Id { get; set; }
         public string Name { get; set; }
