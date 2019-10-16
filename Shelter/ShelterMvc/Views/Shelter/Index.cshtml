@@ -1,13 +1,17 @@
-@model ShelterMvc.Models.ShelterIndexModel;
+@model Shelter.shared.Shelter;
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Animal List (harcoded):</h1>
+    <h1 class="display-4">Animal List:</h1>
     <ul>
+        @foreach (var animal in Model.Animals)
+        {
         <li>
-            @Model.Animals 
+            @animal.name
         </li>
+        }
+        
     </ul>
 </div>
