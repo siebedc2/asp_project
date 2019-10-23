@@ -13,7 +13,6 @@ namespace ShelterMvc.Controllers
     public class ApiController : ControllerBase
     {
         private readonly ILogger<ApiController> _logger;
-
         public ApiController(ILogger<ApiController> logger)
         {
             _logger = logger;
@@ -38,6 +37,9 @@ namespace ShelterMvc.Controllers
             }
 
             return animal;
+        [HttpGet]
+        public IActionResult Brewery(){
+            return Json(new {foo="bar", baz="Blech"});
         }
 
 
