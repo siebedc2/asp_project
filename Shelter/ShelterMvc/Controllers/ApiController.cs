@@ -19,7 +19,9 @@ namespace ShelterMvc.Controllers
         }
         [HttpGet]
         public IActionResult Shelter(){
-            return Json(ShelterIndexModel.Shelter.Name);
+            
+            return Json(ShelterIndexModel.Shelter);
+            
         }
 
 
