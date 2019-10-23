@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ShelterMvc.Models;
+using Shelter.shared;
 
 namespace ShelterMvc.Controllers
 {
-    public class ApiController : Controller
+    public class ApiController : ControllerBase
     {
         private readonly ILogger<ApiController> _logger;
 
@@ -18,20 +19,27 @@ namespace ShelterMvc.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        // GET api/shelter
+        [HttpGet]
+        public ActionResult<IEnumerable<string>> Get()
         {
-            return View();
+            return new string[] { "Id is X", "Sheltername is Y" };
         }
 
-        public IActionResult Privacy()
+        // GET: api/shelter/{id}/animals
+        [HttpGet("{id}")]
+        public ActionResult<Animal> GetAnimals(int id)
         {
-            return View();
+            var animal = ShelterIndexModel.Shelter.Animals.FirstOrDefault(x => x.Id == id);
+
+            if (animal == null)
+            {
+                return null;
+            }
+
+            return animal;
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+
     }
 }

@@ -51,6 +51,9 @@ namespace ShelterMvc
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "api",
+                    pattern: "{controller=Api}/{action=Brewery}/{id?}");
             });
         }
     }
