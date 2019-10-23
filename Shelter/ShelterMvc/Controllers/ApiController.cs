@@ -16,10 +16,15 @@ namespace ShelterMvc.Controllers
         {
             _logger = logger;
         }
-
         [HttpGet]
         public IActionResult Brewery(){
+            
             return Json(new {foo="bar", baz="Blech"});
+        }
+        [HttpPost]
+        public IActionResult Post(){
+            
+            return Json(new {foo="post", baz="Blech"});
         }
     }
 }
