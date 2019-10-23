@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ShelterMvc.Models;
+using Shelter.shared;
 
 namespace ShelterMvc.Controllers
 {
@@ -16,11 +17,11 @@ namespace ShelterMvc.Controllers
         {
             _logger = logger;
         }
-
         [HttpGet]
         public IActionResult Shelter(){
             return Json(ShelterIndexModel.Shelter.Name);
         }
+
 
     }
 }
