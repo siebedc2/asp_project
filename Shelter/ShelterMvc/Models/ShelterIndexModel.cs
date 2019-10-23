@@ -11,14 +11,17 @@ namespace ShelterMvc.Models
 
         private static void Initialize() {
             if (!_isInitialized) {
-                var animal = new Shelter.shared.Shelter() {
+                var shelter = new Shelter.shared.Shelter() {
                     Animals = new List<Animal> {
-                        new Dog() { Name = "Brutus", IsChecked = true, KidFriendly = true, Id = 1 },
-                        new Cat() { Name = "Minoes", IsChecked = true, KidFriendly = true, Id = 2 }
+                        new Dog() { Name = "Brutus", IsChecked = true, KidFriendly = true, Id = 1 , ShelterId = 1},
+                        new Cat() { Name = "Minoes", IsChecked = true, KidFriendly = true, Id = 2 , ShelterId = 1}
                     }
                 };
-            
-            _animal = animal;
+
+            shelter.Id = 1;
+            shelter.Name = "Shelter1";
+
+            _animal = shelter;
             _isInitialized = true;
             
             }

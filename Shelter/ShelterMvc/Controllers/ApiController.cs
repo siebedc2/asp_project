@@ -18,8 +18,9 @@ namespace ShelterMvc.Controllers
         }
 
         [HttpGet]
-        public IActionResult Brewery(){
-            return Json(new {foo="bar", baz="Blech"});
+        public IActionResult Shelter(){
+            return Json(ShelterIndexModel.Shelter.Name);
         }
+
     }
 }
