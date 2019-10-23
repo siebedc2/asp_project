@@ -10,38 +10,22 @@ using Shelter.shared;
 
 namespace ShelterMvc.Controllers
 {
-    public class ApiController : ControllerBase
+    public class ApiController : Controller
     {
         private readonly ILogger<ApiController> _logger;
         public ApiController(ILogger<ApiController> logger)
         {
             _logger = logger;
         }
-
-        // GET api/shelter
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return new string[] { "Id is X", "Sheltername is Y" };
-        }
-
-        // GET: api/shelter/{id}/animals
-        [HttpGet("{id}")]
-        public ActionResult<Animal> GetAnimals(int id)
-        {
-            var animal = ShelterIndexModel.Shelter.Animals.FirstOrDefault(x => x.Id == id);
-
-            if (animal == null)
-            {
-                return null;
-            }
-
-            return animal;
         [HttpGet]
         public IActionResult Brewery(){
+            
             return Json(new {foo="bar", baz="Blech"});
         }
-
-
+        [HttpPost]
+        public IActionResult Post(){
+            
+            return Json(new {foo="post", baz="Blech"});
+        }
     }
 }
