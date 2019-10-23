@@ -12,26 +12,14 @@ namespace ShelterMvc.Controllers
     public class ApiController : Controller
     {
         private readonly ILogger<ApiController> _logger;
-
         public ApiController(ILogger<ApiController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        [HttpGet]
+        public IActionResult Brewery(){
+            return Json(new {foo="bar", baz="Blech"});
         }
     }
 }
