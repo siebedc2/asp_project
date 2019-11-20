@@ -9,4 +9,9 @@
     <ProjectReference Include="..\Shelter.shared\Shelter.shared.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.0.1" />
+  </ItemGroup>
+
 </Project>
