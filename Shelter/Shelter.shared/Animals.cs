@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
-namespace Shelter.shared{
+namespace Shelter.shared {
 
     
-    public abstract class Animal {
+    public abstract class Animal : BaseDbClass {
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime DateOfBirth { get; set; }

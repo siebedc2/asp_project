@@ -4,7 +4,9 @@ using System.Collections.Generic;
 
 
 namespace Shelter.shared{
-    public abstract class Employee {// Begin Employee
+    public abstract class Employee : BaseDbClass
+    
+    {// Begin Employee
         public string Name { get; set; }
     }
     public class Manager:Employee {
