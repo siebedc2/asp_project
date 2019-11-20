@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 
-namespace Brewery.Shared
+namespace Shelter.shared
 {
   public interface IDatabaseInitializer
   {
@@ -11,9 +11,9 @@ namespace Brewery.Shared
 
   public class DatabaseInitializer : IDatabaseInitializer
   {
-    private BreweryContext _context;
+    private ShelterContext _context;
     private ILogger<DatabaseInitializer> _logger;
-    public DatabaseInitializer(BreweryContext context, ILogger<DatabaseInitializer> logger)
+    public DatabaseInitializer(ShelterContext context, ILogger<DatabaseInitializer> logger)
     {
       _context = context;
       _logger = logger;
@@ -36,22 +36,15 @@ namespace Brewery.Shared
 
     private void AddData()
     {
-      var tripel = new BeerType { Name = "Tripel" };
-      var pils = new BeerType { Name = "Pils" };
-      var brewery = new Brewery()
+      var shelter = new Shelter()
       {
-        Name = "InBev Belgium",
-        Owner = new Owner()
-        {
-          Name = "InBev"
-        },
-        Beers = new List<Beer> {
-          new Beer { Name = "Jupiler", BeerType = pils },
-          new Beer { Name = "Tripel Karmeliet ", BeerType = tripel},
-          new Beer { Name = "Stella", BeerType = pils }
+        Name = "MijnEersteShelter",
+        Beers = new List<Animal> {
+          new Dog() { Name = "Brutus", IsChecked = true, KidFriendly = true, Id = 1 , ShelterId = 1},
+          new Cat() { Name = "Minoes", IsChecked = true, KidFriendly = true, Id = 2 , ShelterId = 1}
         }
       };
-      _context.Breweries.Add(brewery);
+      _context.Shelters.Add(shelter);
 
       _context.SaveChanges();
     }
