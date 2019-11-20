@@ -39,6 +39,7 @@ namespace Shelter.shared
       var shelter = new Shelter()
       {
         Name = "MijnEersteShelter",
+        Id = 1,
         Animals = new List<Animal> {
           new Dog() { Name = "Brutus", IsChecked = true, KidFriendly = true, Id = 1 , ShelterId = 1},
           new Cat() { Name = "Minoes", IsChecked = true, KidFriendly = true, Id = 2 , ShelterId = 1}
