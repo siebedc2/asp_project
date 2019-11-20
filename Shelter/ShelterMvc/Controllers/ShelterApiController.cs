@@ -38,7 +38,7 @@ namespace ShelterMvc.Controllers
         }
 
         [Route("{id}")]
-        public IActionResult GetShelter(){
+        public IActionResult GetShelter(int id){
             var shelter = _shelterContext.Shelters.FirstOrDefault(x => x.Id == id);
             return shelter == default(Shelter.shared.Shelter) ? (IActionResult)NotFound() : Ok(shelter);
         }
