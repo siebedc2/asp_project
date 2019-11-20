@@ -1,15 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Brewery.Shared
+namespace Shelter.shared
 {
-  public class BreweryContext : DbContext
+  public class ShelterContext : DbContext
   {
-    public BreweryContext(DbContextOptions<ShelterContext> options) : base(options)
+    public ShelterContext(DbContextOptions<ShelterContext> options) : base(options)
     {
 
     }
 
-    public DbSet<Animals> Animals { get; set; }
+    public DbSet<Animal> Animals { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Shelter> Shelters { get; set; }
     
