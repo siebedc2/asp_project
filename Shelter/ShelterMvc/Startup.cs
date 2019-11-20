@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Shelter.shared;
+using Microsoft.EntityFrameworkCore;
 
 namespace ShelterMvc
 {
@@ -24,10 +26,12 @@ namespace ShelterMvc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<ShelterContext>(options => options.UseSqlite(Configuration.GetConnectionString("AnimalContext")));
+            services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDatabaseInitializer databaseInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -53,8 +57,10 @@ namespace ShelterMvc
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "api",
-                    pattern: "{controller=Api}/{action=Shelter}/{id?}");
+                    pattern: "{controller=ShelterApi}/{action=Shelter}/{id?}");
             });
+
+            databaseInitializer.Initialize();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace ShelterMvc.Controllers
     public class ShelterApiController : Controller
     {
         private readonly ShelterContext _shelterContext;
-        private readonly ILogger<ApiController> _logger;
+        private readonly ILogger<ShelterApiController> _logger;
         public ShelterApiController(ILogger<ShelterApiController> logger, ShelterContext shelterContext)
         {
             _shelterContext = shelterContext;
@@ -32,8 +32,8 @@ namespace ShelterMvc.Controllers
         [Route("full")]
         public IActionResult GetAllSheltersFull(){
             return Json(_shelterContext.Shelters
-                .include(shelter => shelter.Animal)
-                .include(shelter => shelter.Employee)
+                .Include(shelter => shelter.Animals)
+                .Include(shelter => shelter.Employees)
             );
         }
 
