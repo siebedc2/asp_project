@@ -28,6 +28,8 @@ namespace ShelterMvc
             services.AddControllersWithViews();
             services.AddDbContext<ShelterContext>(options => options.UseSqlite(Configuration.GetConnectionString("AnimalContext")));
             services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
+            services.AddScoped<IShelterDataAccess, ShelterDataAccess>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

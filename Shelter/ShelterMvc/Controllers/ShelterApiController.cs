@@ -14,50 +14,44 @@ namespace ShelterMvc.Controllers
     [Route("/api/shelters")]
     public class ShelterApiController : Controller
     {
-        private readonly ShelterContext _shelterContext;
+        private readonly IShelterDataAccess _dataAccess;
         private readonly ILogger<ShelterApiController> _logger;
-        public ShelterApiController(ILogger<ShelterApiController> logger, ShelterContext shelterContext)
+        public ShelterApiController(ILogger<ShelterApiController> logger, IShelterDataAccess _dataAccess)
         {
-            _shelterContext = shelterContext;
+            _dataAccess = dataAccess;
             _logger = logger;
         }
         
         [Route("")]
         public IActionResult GetAllShelters(){
             
-            return Json(_shelterContext.Shelters);
+            return Json(_dataAccess.GetAllShelters());
             
         }
 
         [Route("full")]
         public IActionResult GetAllSheltersFull(){
-            return Json(_shelterContext.Shelters
-                .Include(shelter => shelter.Animals)
-                .Include(shelter => shelter.Employees)
-            );
+            return Json(_dataAccess.GetAllSheltersFull());
         }
 
         [Route("{id}")]
         public IActionResult GetShelter(int id){
-            var shelter = _shelterContext.Shelters.FirstOrDefault(x => x.Id == id);
+            var shelter = _dataAccess.GetShelterById(id);
             return shelter == default(Shelter.shared.Shelter) ? (IActionResult)NotFound() : Ok(shelter);
         }
 
         [Route("{id}/animals")]
     public IActionResult GetShelterAnimals(int id)
     {
-      var shelter = _shelterContext.Shelters
-        .Include(shelter => shelter.Animals)
-        .FirstOrDefault(x => x.Id == id);
-      return shelter == default(Shelter.shared.Shelter) ? (IActionResult)NotFound() : Ok(shelter.Animals);
+      var animals = _dataAccess.GetAnimals(id);
+      return animals == default(IEnumerable<Animal>) ? (IActionResult)NotFound() : Ok(animals);
     }
 
 
     [Route("{shelterId}/animals/{animalId}")]
     public IActionResult GetAnimalDetails(int shelterId, int animalId)
     {
-      var animal = _shelterContext.Animals
-        .FirstOrDefault(x => x.ShelterId == shelterId && x.Id == animalId);
+      var animal = _dataAccess.GetAnimalByShelterAndId(shelterId, animalId);
       return animal == default(Shelter.shared.Animal) ? (IActionResult)NotFound() : Ok(animal);
     }
 
