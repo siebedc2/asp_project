@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using ShelterMvc.Models;
 using Shelter.shared;
 using Microsoft.EntityFrameworkCore;
+using Shelter.MVC;
 
 namespace ShelterMvc.Controllers
 {
@@ -16,7 +17,7 @@ namespace ShelterMvc.Controllers
     {
         private readonly IShelterDataAccess _dataAccess;
         private readonly ILogger<ShelterApiController> _logger;
-        public ShelterApiController(ILogger<ShelterApiController> logger, IShelterDataAccess _dataAccess)
+        public ShelterApiController(ILogger<ShelterApiController> logger, IShelterDataAccess dataAccess)
         {
             _dataAccess = dataAccess;
             _logger = logger;
