@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Shelter.shared;
 using Microsoft.EntityFrameworkCore;
+using Shelter.MVC;
 
 namespace ShelterMvc
 {

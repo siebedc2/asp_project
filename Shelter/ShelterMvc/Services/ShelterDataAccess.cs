@@ -39,7 +39,7 @@ namespace Shelter.MVC
     public Animal GetAnimalByShelterAndId(int shelterId, int animalId)
     {
       return _context.Animals
-        .FirstOrDefault(x => x.shelterId == shelterId && x.Id == animalId);
+        .FirstOrDefault(x => x.ShelterId == shelterId && x.Id == animalId);
     }
 
     public IEnumerable<Animal> GetAnimals(int shelterId)
