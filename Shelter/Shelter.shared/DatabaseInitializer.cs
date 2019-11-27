@@ -42,7 +42,8 @@ namespace Shelter.shared
         Id = 1,
         Animals = new List<Animal> {
           new Dog() { Name = "Brutus", IsChecked = true, KidFriendly = true, Id = 1 , ShelterId = 1},
-          new Cat() { Name = "Minoes", IsChecked = true, KidFriendly = true, Id = 2 , ShelterId = 1}
+          new Cat() { Name = "Minoes", IsChecked = true, KidFriendly = true, Id = 2 , ShelterId = 1},
+          new Cat() { Name = "pspspsps", IsChecked = true, KidFriendly = false, Id = 3 , ShelterId = 1}
         }
       };
       _context.Shelters.Add(shelter);

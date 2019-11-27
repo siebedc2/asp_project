@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Shelter.shared {
 
     
-    public abstract class Animal : BaseDbClass {
+    public class Animal : BaseDbClass {
         public string Name { get; set; }
         public DateTime DateOfBirth { get; set; }
         public bool IsChecked { get; set; }
