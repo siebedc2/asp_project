@@ -13,6 +13,8 @@ namespace Shelter.MVC
 
     IEnumerable<Animal> GetAnimals(int shelterId);
     Animal GetAnimalByShelterAndId(int shelterId, int animalId);
+
+    Animal UpdateAnimal(int shelterId, int animalId, Shelter.shared.Animal animal);
   }
 
   public class ShelterDataAccess : IShelterDataAccess
