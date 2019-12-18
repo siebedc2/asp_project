@@ -23,25 +23,25 @@ namespace ShelterMvc.Controllers
             _logger = logger;
         }
         
-        [Route("")]
+        [HttpGet("")]
         public IActionResult GetAllShelters(){
             
             return Json(_dataAccess.GetAllShelters());
             
         }
 
-        [Route("full")]
+        [HttpGet("full")]
         public IActionResult GetAllSheltersFull(){
             return Json(_dataAccess.GetAllSheltersFull());
         }
 
-        [Route("{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetShelter(int id){
             var shelter = _dataAccess.GetShelterById(id);
             return shelter == default(Shelter.shared.Shelter) ? (IActionResult)NotFound() : Ok(shelter);
         }
 
-        [Route("{id}/animals")]
+        [HttpGet("{id}/animals")]
     public IActionResult GetShelterAnimals(int id)
     {
       var animals = _dataAccess.GetAnimals(id);
@@ -49,7 +49,7 @@ namespace ShelterMvc.Controllers
     }
 
 
-    [Route("{shelterId}/animals/{animalId}")]
+    [HttpGet("{shelterId}/animals/{animalId}")]
     public IActionResult GetAnimalDetails(int shelterId, int animalId)
     {
       var animal = _dataAccess.GetAnimalByShelterAndId(shelterId, animalId);
@@ -59,6 +59,8 @@ namespace ShelterMvc.Controllers
     [HttpPut("{shelterId}/animals/{animalId}")]
     public IActionResult UpdateAnimal(int shelterId, int animalId, [FromBody]Shelter.shared.Animal animal)
     {
+      animal = _dataAccess.UpdateAnimal(shelterId, animalId, animal);
+
       return Ok(animal);
     }
 
