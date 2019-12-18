@@ -64,6 +64,14 @@ namespace ShelterMvc.Controllers
       return Ok(animal);
     }
 
+    [HttpPut("{id}")]
+    public IActionResult UpdateShelter(int shelterId, [FromBody]Shelter.shared.Shelter shelter)
+    {
+      shelter = _dataAccess.UpdateShelter(shelterId, shelter);
+
+      return Ok(shelter);
+    }
+
 
     }
 }

@@ -15,6 +15,8 @@ namespace Shelter.MVC
     Animal GetAnimalByShelterAndId(int shelterId, int animalId);
 
     Animal UpdateAnimal(int shelterId, int animalId, Shelter.shared.Animal animal);
+
+    Shelter.shared.Shelter UpdateShelter(int shelterId, Shelter.shared.Shelter shelter);
   }
 
   public class ShelterDataAccess : IShelterDataAccess
@@ -68,5 +70,16 @@ namespace Shelter.MVC
       _context.SaveChanges();
       return updateAnimal;
     }
+
+    public Shelter.shared.Shelter UpdateShelter(int shelterId, Shelter.shared.Shelter shelter) {
+      Shelter.shared.Shelter updateShelter =  _context.Shelters.FirstOrDefault(x => x.Id == shelterId);
+
+      updateShelter.Name = shelter.Name;
+
+      _context.Update(updateShelter);
+      _context.SaveChanges();
+      return updateShelter;
+    }
+
   }
 } 
