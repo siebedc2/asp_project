@@ -53,9 +53,18 @@ namespace Shelter.MVC
     {
       return _context.Shelters.FirstOrDefault(x => x.Id == id);
     }
-    public Animal UpdateAnimal(int shelterId, int animalId) {
-      return _context.Animals
-        .FirstOrDefault(x => x.ShelterId == shelterId && x.Id == animalId);
+    public Animal UpdateAnimal(int shelterId, int animalId, Shelter.shared.Animal animal) {
+      Animal updateAnimal =  _context.Animals.FirstOrDefault(x => x.ShelterId == shelterId && x.Id == animalId);
+
+      updateAnimal.Name = animal.Name;
+      updateAnimal.DateOfBirth = animal.DateOfBirth;
+      updateAnimal.IsChecked = animal.IsChecked;
+      updateAnimal.KidFriendly = animal.KidFriendly;
+      updateAnimal.ShelterId = animal.ShelterId;
+
+      _context.Update(updateAnimal);
+      _context.SaveChanges();
+      return updateAnimal;
     }
   }
 } 
