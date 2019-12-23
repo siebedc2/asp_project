@@ -42,69 +42,117 @@ namespace ShelterMvc.Controllers
         }
 
         [HttpGet("{id}/animals")]
-    public IActionResult GetShelterAnimals(int id)
-    {
-      var animals = _dataAccess.GetAnimals(id);
-      return animals == default(IEnumerable<Animal>) ? (IActionResult)NotFound() : Ok(animals);
-    }
+        public IActionResult GetShelterAnimals(int id)
+        {
+          var animals = _dataAccess.GetAnimals(id);
+          return animals == default(IEnumerable<Animal>) ? (IActionResult)NotFound() : Ok(animals);
+        }
+
+        [HttpGet("{shelterId}/animals/{animalId}")]
+        public IActionResult GetAnimalDetails(int shelterId, int animalId)
+        {
+          var animal = _dataAccess.GetAnimalByShelterAndId(shelterId, animalId);
+          return animal == default(Shelter.shared.Animal) ? (IActionResult)NotFound() : Ok(animal);
+        }
+
+        [HttpPut("{shelterId}/animals/{animalId}")]
+        public IActionResult UpdateAnimal(int shelterId, int animalId, [FromBody]Shelter.shared.Animal animal)
+        {
+          animal = _dataAccess.UpdateAnimal(shelterId, animalId, animal);
+          return Ok(animal);
+        }
+
+        [HttpPost("{shelterId}/animals/dog")]
+        public IActionResult AddDog(int shelterId, [FromBody]Shelter.shared.Dog dog)
+        {
+          dog = _dataAccess.AddDog(shelterId, dog);
+          return Ok(dog);
+        }
+
+        [HttpPost("{shelterId}/animals/cat")]
+        public IActionResult AddCat(int shelterId, [FromBody]Shelter.shared.Cat cat)
+        {
+          cat = _dataAccess.AddCat(shelterId, cat);
+          return Ok(cat);
+        }
+
+        [HttpPost("{shelterId}/animals/other")]
+        public IActionResult AddOther(int shelterId, [FromBody]Shelter.shared.Other other)
+        {
+          other = _dataAccess.AddOther(shelterId, other);
+          return Ok(other);
+        }
+
+        [HttpDelete("{shelterId}/animals/{animalId}")]
+        public IActionResult DeleteAnimal(int shelterId, int animalId)
+        {
+          Shelter.shared.Animal animal = _dataAccess.DeleteAnimal(shelterId, animalId);
+          return Ok("Deleted Animal");
+        }
 
 
-    [HttpGet("{shelterId}/animals/{animalId}")]
-    public IActionResult GetAnimalDetails(int shelterId, int animalId)
-    {
-      var animal = _dataAccess.GetAnimalByShelterAndId(shelterId, animalId);
-      return animal == default(Shelter.shared.Animal) ? (IActionResult)NotFound() : Ok(animal);
-    }
+        [HttpPut("{id}")]
+        public IActionResult UpdateShelter(int id, [FromBody]Shelter.shared.Shelter shelter)
+        {
+          shelter = _dataAccess.UpdateShelter(id, shelter);
+          return Ok(shelter);
+        }
 
-    [HttpPut("{shelterId}/animals/{animalId}")]
-    public IActionResult UpdateAnimal(int shelterId, int animalId, [FromBody]Shelter.shared.Animal animal)
-    {
-      animal = _dataAccess.UpdateAnimal(shelterId, animalId, animal);
+        [HttpPost("add")]
+        public IActionResult AddShelter([FromBody]Shelter.shared.Shelter shelter)
+        {
+          shelter = _dataAccess.AddShelter(shelter);
+          return Ok(shelter);
+        }
 
-      return Ok(animal);
-    }
+        [HttpDelete("{id}")]
+        public IActionResult DeleteShelter(int id)
+        {
+          Shelter.shared.Shelter shelter = _dataAccess.DeleteShelter(id);
+          return Ok("Deleted shelter");
+        }
 
-    [HttpPost("{shelterId}/animals")]
-    public IActionResult AddAnimal(int shelterId, [FromBody]Shelter.shared.Animal animal)
-    {
-      animal = _dataAccess.AddAnimal(shelterId, animal);
+        [HttpGet("{id}/employees")]
+        public IActionResult GetShelterEmployees(int id)
+        {
+          var employees = _dataAccess.GetShelterEmployees(id);
+          return employees == default(IEnumerable<Employee>) ? (IActionResult)NotFound() : Ok(employees);
+        }
 
-      return Ok(animal);
-    }
+        [HttpPost("{shelterId}/employees/manager")]
+        public IActionResult AddManager(int shelterId, [FromBody]Shelter.shared.Manager manager)
+        {
+          manager = _dataAccess.AddManager(shelterId, manager);
+          return Ok(manager);
+        }
 
-    [HttpDelete("{shelterId}/animals/{animalId}")]
-    public IActionResult DeleteAnimal(int shelterId, int animalId)
-    {
-      Shelter.shared.Animal animal = _dataAccess.DeleteAnimal(shelterId, animalId);
+        [HttpPost("{shelterId}/employees/caretaker")]
+        public IActionResult AddCaretaker(int shelterId, [FromBody]Shelter.shared.Caretaker caretaker)
+        {
+          caretaker = _dataAccess.AddCaretaker(shelterId, caretaker);
+          return Ok(caretaker);
+        }
 
-      return Ok("Deleted Animal");
-    }
+        [HttpPost("{shelterId}/employees/administrator")]
+        public IActionResult AddAdministrator(int shelterId, [FromBody]Shelter.shared.Administrator administrator)
+        {
+          administrator = _dataAccess.AddAdministrator(shelterId, administrator);
+          return Ok(administrator);
+        }
 
+        [HttpPut("{shelterId}/employees/{employeeId}")]
+        public IActionResult UpdateEmployee(int shelterId, int employeeId, [FromBody]Shelter.shared.Employee employee)
+        {
+          employee = _dataAccess.UpdateEmployee(shelterId, employeeId, employee);
+          return Ok(employee);
+        }
 
-    [HttpPut("{id}")]
-    public IActionResult UpdateShelter(int id, [FromBody]Shelter.shared.Shelter shelter)
-    {
-      shelter = _dataAccess.UpdateShelter(id, shelter);
-
-      return Ok(shelter);
-    }
-
-    [HttpPost("add")]
-    public IActionResult AddShelter([FromBody]Shelter.shared.Shelter shelter)
-    {
-      shelter = _dataAccess.AddShelter(shelter);
-
-      return Ok(shelter);
-    }
-
-    [HttpDelete("{id}")]
-    public IActionResult DeleteShelter(int id)
-    {
-      Shelter.shared.Shelter shelter = _dataAccess.DeleteShelter(id);
-
-      return Ok("Deleted shelter");
-    }
-
+        [HttpDelete("{shelterId}/employees/{employeeId}")]
+        public IActionResult DeleteEmployee(int shelterId, int employeeId)
+        {
+          Shelter.shared.Employee employee = _dataAccess.DeleteEmployee(shelterId, employeeId);
+          return Ok("Deleted Employee");
+        }
 
     }
 }
