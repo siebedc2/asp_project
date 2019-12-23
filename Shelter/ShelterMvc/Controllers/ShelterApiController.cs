@@ -65,9 +65,9 @@ namespace ShelterMvc.Controllers
     }
 
     [HttpPut("{id}")]
-    public IActionResult UpdateShelter(int shelterId, [FromBody]Shelter.shared.Shelter shelter)
+    public IActionResult UpdateShelter(int id, [FromBody]Shelter.shared.Shelter shelter)
     {
-      shelter = _dataAccess.UpdateShelter(shelterId, shelter);
+      shelter = _dataAccess.UpdateShelter(id, shelter);
 
       return Ok(shelter);
     }
