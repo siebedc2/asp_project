@@ -15,8 +15,12 @@ namespace Shelter.MVC
     Animal GetAnimalByShelterAndId(int shelterId, int animalId);
 
     Animal UpdateAnimal(int shelterId, int animalId, Shelter.shared.Animal animal);
+    Animal AddAnimal(int shelterId, Shelter.shared.Animal animal);
+    Animal DeleteAnimal(int shelterId, int animalId);
 
     Shelter.shared.Shelter UpdateShelter(int shelterId, Shelter.shared.Shelter shelter);
+    Shelter.shared.Shelter AddShelter(Shelter.shared.Shelter shelter);
+    Shelter.shared.Shelter DeleteShelter(int shelterId);
   }
 
   public class ShelterDataAccess : IShelterDataAccess
@@ -71,6 +75,26 @@ namespace Shelter.MVC
       return updateAnimal;
     }
 
+    public Animal AddAnimal(int shelterId, Shelter.shared.Animal animal) {
+      Animal newAnimal = new Animal{ 
+        Name = animal.Name,
+        DateOfBirth = animal.DateOfBirth,
+        IsChecked = animal.IsChecked,
+        KidFriendly = animal.KidFriendly,
+        ShelterId = shelterId
+        };
+      _context.Add(newAnimal);
+      _context.SaveChanges();
+      return newAnimal;
+    }
+
+    public Animal DeleteAnimal(int shelterId, int animalId) {
+      Animal deleteAnimal =  _context.Animals.FirstOrDefault(x => x.ShelterId == shelterId && x.Id == animalId);
+      _context.Remove(deleteAnimal);
+      _context.SaveChanges();
+      return deleteAnimal;
+    }
+
     public Shelter.shared.Shelter UpdateShelter(int shelterId, Shelter.shared.Shelter shelter) {
       Shelter.shared.Shelter updateShelter =  _context.Shelters.FirstOrDefault(x => x.Id == shelterId);
 
@@ -79,6 +103,20 @@ namespace Shelter.MVC
       _context.Update(updateShelter);
       _context.SaveChanges();
       return updateShelter;
+    }
+
+    public Shelter.shared.Shelter AddShelter(Shelter.shared.Shelter shelter) {
+      Shelter.shared.Shelter newShelter = new Shelter.shared.Shelter{ Name = shelter.Name };
+      _context.Add(newShelter);
+      _context.SaveChanges();
+      return newShelter;
+    }
+
+    public Shelter.shared.Shelter DeleteShelter(int shelterId) {
+      Shelter.shared.Shelter deleteShelter =  _context.Shelters.FirstOrDefault(x => x.Id == shelterId);
+      _context.Remove(deleteShelter);
+      _context.SaveChanges();
+      return deleteShelter;
     }
 
   }

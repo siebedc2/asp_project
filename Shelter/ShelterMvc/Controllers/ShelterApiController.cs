@@ -64,12 +64,45 @@ namespace ShelterMvc.Controllers
       return Ok(animal);
     }
 
+    [HttpPost("{shelterId}/animals")]
+    public IActionResult AddAnimal(int shelterId, [FromBody]Shelter.shared.Animal animal)
+    {
+      animal = _dataAccess.AddAnimal(shelterId, animal);
+
+      return Ok(animal);
+    }
+
+    [HttpDelete("{shelterId}/animals/{animalId}")]
+    public IActionResult DeleteAnimal(int shelterId, int animalId)
+    {
+      Shelter.shared.Animal animal = _dataAccess.DeleteAnimal(shelterId, animalId);
+
+      return Ok("Deleted Animal");
+    }
+
+
     [HttpPut("{id}")]
     public IActionResult UpdateShelter(int id, [FromBody]Shelter.shared.Shelter shelter)
     {
       shelter = _dataAccess.UpdateShelter(id, shelter);
 
       return Ok(shelter);
+    }
+
+    [HttpPost("add")]
+    public IActionResult AddShelter([FromBody]Shelter.shared.Shelter shelter)
+    {
+      shelter = _dataAccess.AddShelter(shelter);
+
+      return Ok(shelter);
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteShelter(int id)
+    {
+      Shelter.shared.Shelter shelter = _dataAccess.DeleteShelter(id);
+
+      return Ok("Deleted shelter");
     }
 
 
