@@ -16,12 +16,12 @@ namespace Shelter.shared {
 
     public class Dog:Animal {
         public string Race { get; set; }
-        public bool Declawed { get; set; }
+        public bool Barker { get; set; }
     }
 
     public class Cat:Animal {
         public string Race { get; set; }
-        public bool Barker { get; set; }
+        public bool Declawed { get; set; }
     }
 
     public class Other:Animal {
