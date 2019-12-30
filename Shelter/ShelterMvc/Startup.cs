@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Shelter.shared;
 using Microsoft.EntityFrameworkCore;
 using Shelter.MVC;
+using Microsoft.OpenApi.Models;
 
 namespace ShelterMvc
 {
@@ -30,6 +31,11 @@ namespace ShelterMvc
             services.AddDbContext<ShelterContext>(options => options.UseSqlite(Configuration.GetConnectionString("AnimalContext")));
             services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
             services.AddScoped<IShelterDataAccess, ShelterDataAccess>();
+            services.AddMvc();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            });
 
         }
 
@@ -61,6 +67,11 @@ namespace ShelterMvc
                 endpoints.MapControllerRoute(
                     name: "api",
                     pattern: "{controller=ShelterApi}/{action=Shelter}/{id?}");
+            });
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
             databaseInitializer.Initialize();
