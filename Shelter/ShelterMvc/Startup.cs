@@ -12,6 +12,8 @@ using Shelter.shared;
 using Microsoft.EntityFrameworkCore;
 using Shelter.MVC;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.IO;
 
 namespace ShelterMvc
 {
@@ -34,7 +36,12 @@ namespace ShelterMvc
             services.AddMvc();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Shelter API", Version = "v1",  Description = "Docs for our Shelter Web API in ASP.NET Core", });
+                //Locate XML file
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                //Use XML comments in Swagger
+                c.IncludeXmlComments(xmlPath);
             });
 
         }
