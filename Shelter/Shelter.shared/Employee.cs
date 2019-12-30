@@ -8,6 +8,7 @@ namespace Shelter.shared{
     
     {// Begin Employee
         public string Name { get; set; }
+
         public int ShelterId { get; set; }
     }
     public class Manager:Employee {
