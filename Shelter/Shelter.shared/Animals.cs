@@ -4,8 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace Shelter.shared {
-
-    
     public class Animal : BaseDbClass {
         public string Name { get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -28,5 +26,4 @@ namespace Shelter.shared {
         public string Description { get; set; }
         public string Kind { get; set; }
     }
-    // End Animal
 }

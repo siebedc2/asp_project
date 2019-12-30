@@ -13,7 +13,7 @@ namespace Shelter.shared{
     }
     public class Manager:Employee {
         // Properties manager
-        public string LicensedManager { get; set; }
+        public bool LicensedManager { get; set; }
     }
 
     public class Caretaker:Employee {
