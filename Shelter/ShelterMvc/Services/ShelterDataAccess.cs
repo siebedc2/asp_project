@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Shelter.shared;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
+using ShelterMvc.Models;
 
 namespace Shelter.MVC
 {
@@ -9,36 +11,40 @@ namespace Shelter.MVC
   {
     IEnumerable<Shelter.shared.Shelter> GetAllShelters();
     IEnumerable<Shelter.shared.Shelter> GetAllSheltersFull();
-    Shelter.shared.Shelter GetShelterById(int id);
+    Shelter.shared.Shelter GetShelterById(string id);
 
-    IEnumerable<Animal> GetAnimals(int shelterId);
-    Animal GetAnimalByShelterAndId(int shelterId, int animalId);
+    IEnumerable<Animal> GetAnimals(string shelterId);
+    Animal GetAnimalByShelterAndId(string shelterId, string animalId);
 
-    Animal UpdateAnimal(int shelterId, int animalId, Shelter.shared.Animal animal);
-    Dog AddDog(int shelterId, Shelter.shared.Dog dog);
-    Cat AddCat(int shelterId, Shelter.shared.Cat cat);
-    Other AddOther(int shelterId, Shelter.shared.Other other);
-    Animal DeleteAnimal(int shelterId, int animalId);
+    Animal UpdateAnimal(string shelterId, string animalId, Shelter.shared.Animal animal);
+    Dog AddDog(string shelterId, Shelter.shared.Dog dog);
+    Cat AddCat(string shelterId, Shelter.shared.Cat cat);
+    Other AddOther(string shelterId, Shelter.shared.Other other);
+    Animal DeleteAnimal(string shelterId, string animalId);
 
-    Shelter.shared.Shelter UpdateShelter(int shelterId, Shelter.shared.Shelter shelter);
+    Shelter.shared.Shelter UpdateShelter(string shelterId, Shelter.shared.Shelter shelter);
     Shelter.shared.Shelter AddShelter(Shelter.shared.Shelter shelter);
-    Shelter.shared.Shelter DeleteShelter(int shelterId);
+    Shelter.shared.Shelter DeleteShelter(string shelterId);
 
-    IEnumerable<Employee> GetShelterEmployees(int shelterId);
-    Manager AddManager(int shelterId, Shelter.shared.Manager manager);
-    Caretaker AddCaretaker(int shelterId, Shelter.shared.Caretaker caretaker);
-    Administrator AddAdministrator(int shelterId, Shelter.shared.Administrator administrator);
-    Employee UpdateEmployee(int shelterId, int employeeId, Shelter.shared.Employee employee);
-    Employee DeleteEmployee(int shelterId, int employeeId);
+    IEnumerable<Employee> GetShelterEmployees(string shelterId);
+    Manager AddManager(string shelterId, Shelter.shared.Manager manager);
+    Caretaker AddCaretaker(string shelterId, Shelter.shared.Caretaker caretaker);
+    Administrator AddAdministrator(string shelterId, Shelter.shared.Administrator administrator);
+    Employee UpdateEmployee(string shelterId, string employeeId, Shelter.shared.Employee employee);
+    Employee DeleteEmployee(string shelterId, string employeeId);
   }
 
   public class ShelterDataAccess : IShelterDataAccess
   {
-    private ShelterContext _context;
 
-    public ShelterDataAccess(ShelterContext context)
+    private readonly IMongoCollection<ShelterContext> _context;
+
+    public ShelterDataAccess(IShelterDatabaseSettings settings)
     {
-      _context = context;
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
+
+            _context = database.GetCollection<ShelterContext>(settings.ShelterCollectionName);
     }
 
     public IEnumerable<Shelter.shared.Shelter> GetAllShelters()
@@ -53,25 +59,25 @@ namespace Shelter.MVC
         .Include(shelter => shelter.Employees);
     }
 
-    public Animal GetAnimalByShelterAndId(int shelterId, int animalId)
+    public Animal GetAnimalByShelterAndId(string shelterId, string animalId)
     {
       return _context.Animals
         .FirstOrDefault(x => x.ShelterId == shelterId && x.Id == animalId);
     }
 
-    public IEnumerable<Animal> GetAnimals(int shelterId)
+    public IEnumerable<Animal> GetAnimals(string shelterId)
     {
       return _context.Shelters
         .Include(shelter => shelter.Animals)
         .FirstOrDefault(x => x.Id == shelterId)?.Animals;
     }
 
-    public Shelter.shared.Shelter GetShelterById(int id)
+    public Shelter.shared.Shelter GetShelterById(string id)
     {
       return _context.Shelters.FirstOrDefault(x => x.Id == id);
     }
 
-    public Animal UpdateAnimal(int shelterId, int animalId, Shelter.shared.Animal animal) {
+    public Animal UpdateAnimal(string shelterId, string animalId, Shelter.shared.Animal animal) {
       Animal updateAnimal =  _context.Animals.FirstOrDefault(x => x.ShelterId == shelterId && x.Id == animalId);
 
       updateAnimal.Name = animal.Name;
@@ -85,7 +91,7 @@ namespace Shelter.MVC
       return updateAnimal;
     }
 
-    public Dog AddDog(int shelterId, Shelter.shared.Dog dog) {
+    public Dog AddDog(string shelterId, Shelter.shared.Dog dog) {
       Dog newDog = new Dog{ 
         Name = dog.Name,
         DateOfBirth = dog.DateOfBirth,
@@ -100,7 +106,7 @@ namespace Shelter.MVC
         return newDog;
     }
 
-    public Cat AddCat(int shelterId, Shelter.shared.Cat cat) {
+    public Cat AddCat(string shelterId, Shelter.shared.Cat cat) {
       Cat newCat = new Cat{ 
         Name = cat.Name,
         DateOfBirth = cat.DateOfBirth,
@@ -115,7 +121,7 @@ namespace Shelter.MVC
         return newCat;
     }
 
-    public Other AddOther(int shelterId, Shelter.shared.Other other) {
+    public Other AddOther(string shelterId, Shelter.shared.Other other) {
       Other newOther = new Other{ 
         Name = other.Name,
         DateOfBirth = other.DateOfBirth,
@@ -130,14 +136,14 @@ namespace Shelter.MVC
         return newOther;
     }
 
-    public Animal DeleteAnimal(int shelterId, int animalId) {
+    public Animal DeleteAnimal(string shelterId, string animalId) {
       Animal deleteAnimal =  _context.Animals.FirstOrDefault(x => x.ShelterId == shelterId && x.Id == animalId);
       _context.Remove(deleteAnimal);
       _context.SaveChanges();
       return deleteAnimal;
     }
 
-    public Shelter.shared.Shelter UpdateShelter(int shelterId, Shelter.shared.Shelter shelter) {
+    public Shelter.shared.Shelter UpdateShelter(string shelterId, Shelter.shared.Shelter shelter) {
       Shelter.shared.Shelter updateShelter =  _context.Shelters.FirstOrDefault(x => x.Id == shelterId);
 
       updateShelter.Name = shelter.Name;
@@ -154,21 +160,21 @@ namespace Shelter.MVC
       return newShelter;
     }
 
-    public Shelter.shared.Shelter DeleteShelter(int shelterId) {
+    public Shelter.shared.Shelter DeleteShelter(string shelterId) {
       Shelter.shared.Shelter deleteShelter =  _context.Shelters.FirstOrDefault(x => x.Id == shelterId);
       _context.Remove(deleteShelter);
       _context.SaveChanges();
       return deleteShelter;
     }
 
-    public IEnumerable<Employee> GetShelterEmployees(int shelterId)
+    public IEnumerable<Employee> GetShelterEmployees(string shelterId)
     {
       return _context.Shelters
         .Include(shelter => shelter.Employees)
         .FirstOrDefault(x => x.Id == shelterId)?.Employees;
     }
 
-    public Manager AddManager(int shelterId, Shelter.shared.Manager manager) {
+    public Manager AddManager(string shelterId, Shelter.shared.Manager manager) {
       Manager newManager = new Manager{ 
         Name = manager.Name,
         LicensedManager = manager.LicensedManager,
@@ -179,7 +185,7 @@ namespace Shelter.MVC
         return newManager;
     }
 
-    public Caretaker AddCaretaker(int shelterId, Shelter.shared.Caretaker caretaker) {
+    public Caretaker AddCaretaker(string shelterId, Shelter.shared.Caretaker caretaker) {
       Caretaker newCaretaker = new Caretaker{ 
         Name = caretaker.Name,
         FixedContract = caretaker.FixedContract,
@@ -190,7 +196,7 @@ namespace Shelter.MVC
         return newCaretaker;
     }
 
-    public Administrator AddAdministrator(int shelterId, Shelter.shared.Administrator administrator) {
+    public Administrator AddAdministrator(string shelterId, Shelter.shared.Administrator administrator) {
       Administrator newAdministrator = new Administrator{ 
         Name = administrator.Name,
         DigitalAdministration = administrator.DigitalAdministration,
@@ -201,7 +207,7 @@ namespace Shelter.MVC
         return newAdministrator;
     }
 
-    public Employee UpdateEmployee(int shelterId, int employeeId, Shelter.shared.Employee employee) {
+    public Employee UpdateEmployee(string shelterId, string employeeId, Shelter.shared.Employee employee) {
       Employee updateEmployee =  _context.Employees.FirstOrDefault(x => x.ShelterId == shelterId && x.Id == employeeId);
 
       updateEmployee.Name = employee.Name;
@@ -212,7 +218,7 @@ namespace Shelter.MVC
       return updateEmployee;
     }
 
-    public Employee DeleteEmployee(int shelterId, int employeeId) {
+    public Employee DeleteEmployee(string shelterId, string employeeId) {
       Employee deleteEmployee =  _context.Employees.FirstOrDefault(x => x.ShelterId == shelterId && x.Id == employeeId);
       _context.Remove(deleteEmployee);
       _context.SaveChanges();

@@ -39,11 +39,11 @@ namespace Shelter.shared
       var shelter = new Shelter()
       {
         Name = "MijnEersteShelter",
-        Id = 1,
+        Id = "aa1",
         Animals = new List<Animal> {
-          new Dog() { Name = "Brutus", IsChecked = true, KidFriendly = true, Id = 1 , ShelterId = 1},
-          new Cat() { Name = "Minoes", IsChecked = true, KidFriendly = true, Id = 2 , ShelterId = 1},
-          new Cat() { Name = "pspspsps", IsChecked = true, KidFriendly = false, Id = 3 , ShelterId = 1}
+          new Dog() { Name = "Brutus", IsChecked = true, KidFriendly = true, Id = "a1" , ShelterId = "aa1"},
+          new Cat() { Name = "Minoes", IsChecked = true, KidFriendly = true, Id = "a2" , ShelterId = "aa1"},
+          new Cat() { Name = "pspspsps", IsChecked = true, KidFriendly = false, Id = "a3" , ShelterId = "aa1"}
         }
       };
       _context.Shelters.Add(shelter);

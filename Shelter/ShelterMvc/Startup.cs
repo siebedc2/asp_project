@@ -14,6 +14,8 @@ using Shelter.MVC;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
+using Microsoft.Extensions.Options;
+using ShelterMvc.Models;
 
 namespace ShelterMvc
 {
@@ -43,6 +45,13 @@ namespace ShelterMvc
                 //Use XML comments in Swagger
                 c.IncludeXmlComments(xmlPath);
             });
+
+            // requires using Microsoft.Extensions.Options
+            services.Configure<ShelterDatabaseSettings>(
+                Configuration.GetSection(nameof(ShelterDatabaseSettings)));
+
+            services.AddSingleton<IShelterDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<ShelterDatabaseSettings>>().Value);
 
         }
 

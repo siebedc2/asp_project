@@ -46,7 +46,7 @@ namespace ShelterMvc.Controllers
         /// </summary>
         /// <param name="id">The ID of the shelter you're looking for</param>
         [HttpGet("{id}")]
-        public IActionResult GetShelter(int id){
+        public IActionResult GetShelter(string id){
             var shelter = _dataAccess.GetShelterById(id);
             return shelter == default(Shelter.shared.Shelter) ? (IActionResult)NotFound() : Ok(shelter);
         }
@@ -56,7 +56,7 @@ namespace ShelterMvc.Controllers
         /// </summary>
         /// <param name="id">The ID of the shelter's animals you're looking' for</param>
         [HttpGet("{id}/animals")]
-        public IActionResult GetShelterAnimals(int id)
+        public IActionResult GetShelterAnimals(string id)
         {
           var animals = _dataAccess.GetAnimals(id);
           return animals == default(IEnumerable<Animal>) ? (IActionResult)NotFound() : Ok(animals);
@@ -68,7 +68,7 @@ namespace ShelterMvc.Controllers
         /// <param name="shelterId">The ID of the shelter that the animal belongs to</param>
         /// <param name="animalId">The ID of the animal you're looking for</param>
         [HttpGet("{shelterId}/animals/{animalId}")]
-        public IActionResult GetAnimalDetails(int shelterId, int animalId)
+        public IActionResult GetAnimalDetails(string shelterId, string animalId)
         {
           var animal = _dataAccess.GetAnimalByShelterAndId(shelterId, animalId);
           return animal == default(Shelter.shared.Animal) ? (IActionResult)NotFound() : Ok(animal);
@@ -91,7 +91,7 @@ namespace ShelterMvc.Controllers
         ///
         /// </remarks>
         [HttpPut("{shelterId}/animals/{animalId}")]
-        public IActionResult UpdateAnimal(int shelterId, int animalId, [FromBody]Shelter.shared.Animal animal)
+        public IActionResult UpdateAnimal(string shelterId, string animalId, [FromBody]Shelter.shared.Animal animal)
         {
           animal = _dataAccess.UpdateAnimal(shelterId, animalId, animal);
           return Ok(animal);
@@ -115,7 +115,7 @@ namespace ShelterMvc.Controllers
         ///
         /// </remarks>
         [HttpPost("{shelterId}/animals/dog")]
-        public IActionResult AddDog(int shelterId, [FromBody]Shelter.shared.Dog dog)
+        public IActionResult AddDog(string shelterId, [FromBody]Shelter.shared.Dog dog)
         {
           dog = _dataAccess.AddDog(shelterId, dog);
           return Ok(dog);
@@ -139,7 +139,7 @@ namespace ShelterMvc.Controllers
         ///
         /// </remarks>
         [HttpPost("{shelterId}/animals/cat")]
-        public IActionResult AddCat(int shelterId, [FromBody]Shelter.shared.Cat cat)
+        public IActionResult AddCat(string shelterId, [FromBody]Shelter.shared.Cat cat)
         {
           cat = _dataAccess.AddCat(shelterId, cat);
           return Ok(cat);
@@ -163,7 +163,7 @@ namespace ShelterMvc.Controllers
         ///
         /// </remarks>
         [HttpPost("{shelterId}/animals/other")]
-        public IActionResult AddOther(int shelterId, [FromBody]Shelter.shared.Other other)
+        public IActionResult AddOther(string shelterId, [FromBody]Shelter.shared.Other other)
         {
           other = _dataAccess.AddOther(shelterId, other);
           return Ok(other);
@@ -175,7 +175,7 @@ namespace ShelterMvc.Controllers
         /// <param name="shelterId">The ID of the shelter that the animal belongs to</param>
         /// <param name="animalId">The ID of the animal you want to delete</param>
         [HttpDelete("{shelterId}/animals/{animalId}")]
-        public IActionResult DeleteAnimal(int shelterId, int animalId)
+        public IActionResult DeleteAnimal(string shelterId, string animalId)
         {
           Shelter.shared.Animal animal = _dataAccess.DeleteAnimal(shelterId, animalId);
           return Ok("Deleted Animal");
@@ -194,7 +194,7 @@ namespace ShelterMvc.Controllers
         ///
         /// </remarks>
         [HttpPut("{id}")]
-        public IActionResult UpdateShelter(int id, [FromBody]Shelter.shared.Shelter shelter)
+        public IActionResult UpdateShelter(string id, [FromBody]Shelter.shared.Shelter shelter)
         {
           shelter = _dataAccess.UpdateShelter(id, shelter);
           return Ok(shelter);
@@ -223,7 +223,7 @@ namespace ShelterMvc.Controllers
         /// </summary>
         /// <param name="id">The ID of the shelter</param>
         [HttpDelete("{id}")]
-        public IActionResult DeleteShelter(int id)
+        public IActionResult DeleteShelter(string id)
         {
           Shelter.shared.Shelter shelter = _dataAccess.DeleteShelter(id);
           return Ok("Deleted shelter");
@@ -234,7 +234,7 @@ namespace ShelterMvc.Controllers
         /// </summary>
         /// <param name="id">The ID of the shelter's employees you're searching for</param>
         [HttpGet("{id}/employees")]
-        public IActionResult GetShelterEmployees(int id)
+        public IActionResult GetShelterEmployees(string id)
         {
           var employees = _dataAccess.GetShelterEmployees(id);
           return employees == default(IEnumerable<Employee>) ? (IActionResult)NotFound() : Ok(employees);
@@ -254,7 +254,7 @@ namespace ShelterMvc.Controllers
         ///
         /// </remarks>
         [HttpPost("{shelterId}/employees/manager")]
-        public IActionResult AddManager(int shelterId, [FromBody]Shelter.shared.Manager manager)
+        public IActionResult AddManager(string shelterId, [FromBody]Shelter.shared.Manager manager)
         {
           manager = _dataAccess.AddManager(shelterId, manager);
           return Ok(manager);
@@ -274,7 +274,7 @@ namespace ShelterMvc.Controllers
         ///
         /// </remarks>
         [HttpPost("{shelterId}/employees/caretaker")]
-        public IActionResult AddCaretaker(int shelterId, [FromBody]Shelter.shared.Caretaker caretaker)
+        public IActionResult AddCaretaker(string shelterId, [FromBody]Shelter.shared.Caretaker caretaker)
         {
           caretaker = _dataAccess.AddCaretaker(shelterId, caretaker);
           return Ok(caretaker);
@@ -293,7 +293,7 @@ namespace ShelterMvc.Controllers
         ///
         /// </remarks>
         [HttpPost("{shelterId}/employees/administrator")]
-        public IActionResult AddAdministrator(int shelterId, [FromBody]Shelter.shared.Administrator administrator)
+        public IActionResult AddAdministrator(string shelterId, [FromBody]Shelter.shared.Administrator administrator)
         {
           administrator = _dataAccess.AddAdministrator(shelterId, administrator);
           return Ok(administrator);
@@ -314,7 +314,7 @@ namespace ShelterMvc.Controllers
         ///
         /// </remarks>
         [HttpPut("{shelterId}/employees/{employeeId}")]
-        public IActionResult UpdateEmployee(int shelterId, int employeeId, [FromBody]Shelter.shared.Employee employee)
+        public IActionResult UpdateEmployee(string shelterId, string employeeId, [FromBody]Shelter.shared.Employee employee)
         {
           employee = _dataAccess.UpdateEmployee(shelterId, employeeId, employee);
           return Ok(employee);
@@ -326,7 +326,7 @@ namespace ShelterMvc.Controllers
         /// <param name="shelterId">The ID of the shelter that the animal belongs to</param>
         /// <param name="employeeId">The ID of the employee that needs to be deleted</param>
         [HttpDelete("{shelterId}/employees/{employeeId}")]
-        public IActionResult DeleteEmployee(int shelterId, int employeeId)
+        public IActionResult DeleteEmployee(string shelterId, string employeeId)
         {
           Shelter.shared.Employee employee = _dataAccess.DeleteEmployee(shelterId, employeeId);
           return Ok("Deleted Employee");

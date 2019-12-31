@@ -26,7 +26,7 @@ namespace ShelterMvc.Controllers
             return View(ShelterIndexModel.Shelter);
         }
 
-        public IActionResult Detail(int id)
+        public IActionResult Detail(string id)
         {
             var targetAnimal = ShelterIndexModel.Shelter.Animals.FirstOrDefault(x => x.Id == id);
             if (targetAnimal == default(Animal))
@@ -36,7 +36,7 @@ namespace ShelterMvc.Controllers
             return View(targetAnimal);
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(string id)
         {
             var targetAnimal = ShelterIndexModel.Shelter.Animals.FirstOrDefault(x => x.Id == id);
             if (targetAnimal == default(Animal))
@@ -47,7 +47,7 @@ namespace ShelterMvc.Controllers
         }
 
         [HttpPost]
-        public IActionResult DoEdit(int id)
+        public IActionResult DoEdit(string id)
         {
             var targetAnimal = ShelterIndexModel.Shelter.Animals.FirstOrDefault(x => x.Id == id);
             if (targetAnimal == default(Animal))
@@ -60,7 +60,7 @@ namespace ShelterMvc.Controllers
 
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             var targetAnimal = ShelterIndexModel.Shelter.Animals.FirstOrDefault(x => x.Id == id);
             if (targetAnimal == default(Animal))
@@ -71,7 +71,7 @@ namespace ShelterMvc.Controllers
         }
 
         [HttpPost]
-        public IActionResult DoDelete(int id)
+        public IActionResult DoDelete(string id)
         {
             var targetAnimal = ShelterIndexModel.Shelter.Animals.FirstOrDefault(x => x.Id == id);
             if (targetAnimal == default(Animal))

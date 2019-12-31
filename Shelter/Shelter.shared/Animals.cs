@@ -9,7 +9,7 @@ namespace Shelter.shared {
         public DateTime DateOfBirth { get; set; }
         public bool IsChecked { get; set; }
         public bool KidFriendly { get; set; }
-        public int ShelterId { get; set; }
+        public string ShelterId { get; set; }
     }
 
     public class Dog:Animal {

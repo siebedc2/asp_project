@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 
 namespace Shelter.shared
 {
   public class ShelterContext : DbContext
   {
-    public ShelterContext(DbContextOptions<ShelterContext> options) : base(options)
+    public ShelterContext(IMongoCollection<ShelterContext> options) 
     {
 
     }
