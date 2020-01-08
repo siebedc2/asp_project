@@ -136,6 +136,5 @@ namespace Shelter.MVC
     public void DeleteEmployee(string shelterId, string employeeId) {
       _context.Employees.DeleteOne(x => x.ShelterId == shelterId && x.Id == employeeId);
     }
-
   }
 } 
