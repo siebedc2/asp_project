@@ -44,13 +44,6 @@ namespace ShelterMvc
                 c.IncludeXmlComments(xmlPath);
             });
 
-            // requires using Microsoft.Extensions.Options
-            services.Configure<ShelterDatabaseSettings>(
-                Configuration.GetSection(nameof(ShelterDatabaseSettings)));
-
-            services.AddSingleton<IShelterDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<ShelterDatabaseSettings>>().Value);
-
             services.AddSingleton<IMongoClient>(s => new MongoClient(Configuration.GetConnectionString("MongoDb")));
             services.AddScoped(s => new ShelterContext(s.GetRequiredService<IMongoClient>(), Configuration["DatabaseName"]));
         }
@@ -90,8 +83,6 @@ namespace ShelterMvc
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
-
-            databaseInitializer.Initialize();
         }
     }
 }
