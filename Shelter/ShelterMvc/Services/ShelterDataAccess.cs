@@ -9,10 +9,10 @@ namespace Shelter.MVC
   public interface IShelterDataAccess
   {
     IMongoCollection<Shelter.shared.Shelter> GetAllShelters();
-    IEnumerable<Shelter.shared.Shelter> GetAllSheltersFull();
+    IMongoCollection<Shelter.shared.Shelter> GetAllSheltersFull();
     Shelter.shared.Shelter GetShelterById(string id);
 
-    IEnumerable<Animal> GetAnimals(string shelterId);
+    IMongoCollection<Animal> GetAnimals(string shelterId);
     Animal GetAnimalByShelterAndId(string shelterId, string animalId);
 
     Animal UpdateAnimal(string shelterId, string animalId, Shelter.shared.Animal animal);
@@ -25,7 +25,7 @@ namespace Shelter.MVC
     Shelter.shared.Shelter AddShelter(Shelter.shared.Shelter shelter);
     Shelter.shared.Shelter DeleteShelter(string shelterId);
 
-    IEnumerable<Employee> GetShelterEmployees(string shelterId);
+    IMongoCollection<Employee> GetShelterEmployees(string shelterId);
     Manager AddManager(string shelterId, Shelter.shared.Manager manager);
     Caretaker AddCaretaker(string shelterId, Shelter.shared.Caretaker caretaker);
     Administrator AddAdministrator(string shelterId, Shelter.shared.Administrator administrator);
@@ -56,8 +56,7 @@ namespace Shelter.MVC
 
     public Animal GetAnimalByShelterAndId(string shelterId, string animalId)
     {
-      return _context.Animals
-        .FirstOrDefault(x => x.ShelterId == shelterId && x.Id == animalId);
+      return _context.Animals.Find<Animal>(x => x.ShelterId == shelterId && x.Id == animalId).FirstOrDefault();
     }
 
     public IEnumerable<Animal> GetAnimals(string shelterId)
@@ -69,7 +68,7 @@ namespace Shelter.MVC
 
     public Shelter.shared.Shelter GetShelterById(string id)
     {
-      return _context.Shelters.FirstOrDefault(x => x.Id == id);
+      return _context.Shelters.Find<Shelter.shared.Shelter>(x => x.Id == id).FirstOrDefault();
     }
 
     public Animal UpdateAnimal(string shelterId, string animalId, Shelter.shared.Animal animal) {
