@@ -47,7 +47,7 @@ namespace Shelter.MVC
       return _context.Shelters;
     }
 
-    public IEnumerable<Shelter.shared.Shelter> GetAllSheltersFull()
+    public IMongoCollection<Shelter.shared.Shelter> GetAllSheltersFull()
     {
       return _context.Shelters
         .Include(shelter => shelter.Animals)
@@ -59,7 +59,7 @@ namespace Shelter.MVC
       return _context.Animals.Find<Animal>(x => x.ShelterId == shelterId && x.Id == animalId).FirstOrDefault();
     }
 
-    public IEnumerable<Animal> GetAnimals(string shelterId)
+    public IMongoCollection<Animal> GetAnimals(string shelterId)
     {
       return _context.Shelters
         .Include(shelter => shelter.Animals)
@@ -130,11 +130,8 @@ namespace Shelter.MVC
         return newOther;
     }
 
-    public Animal DeleteAnimal(string shelterId, string animalId) {
-      Animal deleteAnimal =  _context.Animals.FirstOrDefault(x => x.ShelterId == shelterId && x.Id == animalId);
-      _context.Remove(deleteAnimal);
-      _context.SaveChanges();
-      return deleteAnimal;
+    public void DeleteAnimal(string shelterId, string animalId) {
+      _context.Animals.DeleteOne(x => x.ShelterId == shelterId && x.Id == animalId);
     }
 
     public Shelter.shared.Shelter UpdateShelter(string shelterId, Shelter.shared.Shelter shelter) {
@@ -154,14 +151,11 @@ namespace Shelter.MVC
       return newShelter;
     }
 
-    public Shelter.shared.Shelter DeleteShelter(string shelterId) {
-      Shelter.shared.Shelter deleteShelter =  _context.Shelters.FirstOrDefault(x => x.Id == shelterId);
-      _context.Remove(deleteShelter);
-      _context.SaveChanges();
-      return deleteShelter;
+    public void DeleteShelter(string shelterId) {
+      _context.Shelters.DeleteOne(x => x.Id == shelterId);
     }
 
-    public IEnumerable<Employee> GetShelterEmployees(string shelterId)
+    public IMongoCollection<Employee> GetShelterEmployees(string shelterId)
     {
       return _context.Shelters
         .Include(shelter => shelter.Employees)
@@ -212,11 +206,8 @@ namespace Shelter.MVC
       return updateEmployee;
     }
 
-    public Employee DeleteEmployee(string shelterId, string employeeId) {
-      Employee deleteEmployee =  _context.Employees.FirstOrDefault(x => x.ShelterId == shelterId && x.Id == employeeId);
-      _context.Remove(deleteEmployee);
-      _context.SaveChanges();
-      return deleteEmployee;
+    public void DeleteEmployee(string shelterId, string employeeId) {
+      _context.Employees.DeleteOne(x => x.ShelterId == shelterId && x.Id == employeeId);
     }
 
   }
