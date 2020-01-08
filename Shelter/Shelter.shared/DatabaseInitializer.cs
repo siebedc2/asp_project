@@ -22,10 +22,7 @@ namespace Shelter.shared
     {
       try
       {
-        if (_context.Database.EnsureCreated())
-        {
           AddData();
-        }
       }
       catch (Exception ex)
       {
@@ -46,9 +43,7 @@ namespace Shelter.shared
           new Cat() { Name = "pspspsps", IsChecked = true, KidFriendly = false, Id = "a3" , ShelterId = "aa1"}
         }
       };
-      _context.Shelters.Add(shelter);
-
-      _context.SaveChanges();
+      _context.Shelters.InsertOne(shelter);
     }
   }
 } 

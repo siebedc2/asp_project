@@ -9,14 +9,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Shelter.shared;
-using Microsoft.EntityFrameworkCore;
 using Shelter.MVC;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
 using Microsoft.Extensions.Options;
 using ShelterMvc.Models;
-
+using MongoDB.Driver;
 namespace ShelterMvc
 {
     public class Startup
@@ -32,7 +31,6 @@ namespace ShelterMvc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<ShelterContext>(options => options.UseSqlite(Configuration.GetConnectionString("AnimalContext")));
             services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
             services.AddScoped<IShelterDataAccess, ShelterDataAccess>();
             services.AddMvc();
@@ -53,6 +51,8 @@ namespace ShelterMvc
             services.AddSingleton<IShelterDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<ShelterDatabaseSettings>>().Value);
 
+            services.AddSingleton<IMongoClient>(s => new MongoClient(Configuration.GetConnectionString("MongoDb")));
+            services.AddScoped(s => new ShelterContext(s.GetRequiredService<IMongoClient>(), Configuration["DatabaseName"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

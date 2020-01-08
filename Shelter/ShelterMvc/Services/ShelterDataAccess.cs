@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Shelter.shared;
-using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using ShelterMvc.Models;
 
@@ -37,14 +36,10 @@ namespace Shelter.MVC
   public class ShelterDataAccess : IShelterDataAccess
   {
 
-    private readonly IMongoCollection<ShelterContext> _context;
-
-    public ShelterDataAccess(IShelterDatabaseSettings settings)
+    private readonly ShelterContext _context;
+    public ShelterDataAccess(ShelterContext db)
     {
-            var client = new MongoClient(settings.ConnectionString);
-            var database = client.GetDatabase(settings.DatabaseName);
-
-            _context = database.GetCollection<ShelterContext>(settings.ShelterCollectionName);
+            _context = db;
     }
 
     public IEnumerable<Shelter.shared.Shelter> GetAllShelters()
