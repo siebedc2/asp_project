@@ -86,48 +86,18 @@ namespace Shelter.MVC
     }
 
     public Dog AddDog(string shelterId, Shelter.shared.Dog dog) {
-      Dog newDog = new Dog{ 
-        Name = dog.Name,
-        DateOfBirth = dog.DateOfBirth,
-        IsChecked = dog.IsChecked,
-        KidFriendly = dog.KidFriendly,
-        ShelterId = shelterId,
-        Race = dog.Race,
-        Barker = dog.Barker
-      };
-        _context.Add(newDog);
-        _context.SaveChanges();
-        return newDog;
+        _context.Animals.InsertOne(dog);
+        return dog;
     }
 
     public Cat AddCat(string shelterId, Shelter.shared.Cat cat) {
-      Cat newCat = new Cat{ 
-        Name = cat.Name,
-        DateOfBirth = cat.DateOfBirth,
-        IsChecked = cat.IsChecked,
-        KidFriendly = cat.KidFriendly,
-        ShelterId = shelterId,
-        Race = cat.Race,
-        Declawed = cat.Declawed
-      };
-        _context.Add(newCat);
-        _context.SaveChanges();
-        return newCat;
+      _context.Animals.InsertOne(cat);
+      return cat;
     }
 
     public Other AddOther(string shelterId, Shelter.shared.Other other) {
-      Other newOther = new Other{ 
-        Name = other.Name,
-        DateOfBirth = other.DateOfBirth,
-        IsChecked = other.IsChecked,
-        KidFriendly = other.KidFriendly,
-        ShelterId = shelterId,
-        Kind = other.Kind,
-        Description = other.Description
-      };
-        _context.Add(newOther);
-        _context.SaveChanges();
-        return newOther;
+      _context.Animals.InsertOne(other);
+      return other;
     }
 
     public void DeleteAnimal(string shelterId, string animalId) {
@@ -163,36 +133,18 @@ namespace Shelter.MVC
     }
 
     public Manager AddManager(string shelterId, Shelter.shared.Manager manager) {
-      Manager newManager = new Manager{ 
-        Name = manager.Name,
-        LicensedManager = manager.LicensedManager,
-        ShelterId = shelterId
-      };
-        _context.Add(newManager);
-        _context.SaveChanges();
-        return newManager;
+      _context.Employees.InsertOne(manager);
+      return manager;
     }
 
     public Caretaker AddCaretaker(string shelterId, Shelter.shared.Caretaker caretaker) {
-      Caretaker newCaretaker = new Caretaker{ 
-        Name = caretaker.Name,
-        FixedContract = caretaker.FixedContract,
-        ShelterId = shelterId
-      };
-        _context.Add(newCaretaker);
-        _context.SaveChanges();
-        return newCaretaker;
+      _context.Employees.InsertOne(caretaker);
+      return caretaker;
     }
 
     public Administrator AddAdministrator(string shelterId, Shelter.shared.Administrator administrator) {
-      Administrator newAdministrator = new Administrator{ 
-        Name = administrator.Name,
-        DigitalAdministration = administrator.DigitalAdministration,
-        ShelterId = shelterId
-      };
-        _context.Add(newAdministrator);
-        _context.SaveChanges();
-        return newAdministrator;
+      _context.Employees.InsertOne(administrator);
+      return administrator;
     }
 
     public Employee UpdateEmployee(string shelterId, string employeeId, Shelter.shared.Employee employee) {
