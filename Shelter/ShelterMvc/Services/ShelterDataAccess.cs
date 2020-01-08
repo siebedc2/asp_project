@@ -59,21 +59,12 @@ namespace Shelter.MVC
       return _context.Animals.Find<Animal>(x => x.ShelterId == shelterId && x.Id == animalId).FirstOrDefault();
     }
 
-<<<<<<< HEAD
     public IMongoCollection<Animal> GetAnimals(string shelterId)
     {
       var collection = _context.Animals;
       collection.Find<Animal>(x => x.Id == shelterId);
       return collection;
     }
-=======
-    // public IMongoCollection<Animal> GetAnimals(string shelterId)
-    // {
-    //   return _context.Shelters
-    //     .Include(shelter => shelter.Animals)
-    //     .FirstOrDefault(x => x.Id == shelterId)?.Animals;
-    // }
->>>>>>> 3a217ad9f76696f2c172d815945f659aa2967b2d
 
     public Shelter.shared.Shelter GetShelterById(string id)
     {
@@ -116,21 +107,12 @@ namespace Shelter.MVC
       _context.Shelters.DeleteOne(x => x.Id == shelterId);
     }
 
-<<<<<<< HEAD
     public IMongoCollection<Employee> GetShelterEmployees(string shelterId)
     {
       var collection = _context.Employees;
       collection.Find<Employee>(x => x.Id == shelterId);
       return collection;
     }
-=======
-    // public IMongoCollection<Employee> GetShelterEmployees(string shelterId)
-    // {
-    //   return _context.Shelters
-    //     .Include(shelter => shelter.Employees)
-    //     .FirstOrDefault(x => x.Id == shelterId)?.Employees;
-    // }
->>>>>>> 3a217ad9f76696f2c172d815945f659aa2967b2d
 
     public Manager AddManager(string shelterId, Shelter.shared.Manager manager) {
       _context.Employees.InsertOne(manager);
