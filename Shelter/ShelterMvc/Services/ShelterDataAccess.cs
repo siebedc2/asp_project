@@ -71,18 +71,8 @@ namespace Shelter.MVC
       return _context.Shelters.Find<Shelter.shared.Shelter>(x => x.Id == id).FirstOrDefault();
     }
 
-    public Animal UpdateAnimal(string shelterId, string animalId, Shelter.shared.Animal animal) {
-      Animal updateAnimal =  _context.Animals.FirstOrDefault(x => x.ShelterId == shelterId && x.Id == animalId);
-
-      updateAnimal.Name = animal.Name;
-      updateAnimal.DateOfBirth = animal.DateOfBirth;
-      updateAnimal.IsChecked = animal.IsChecked;
-      updateAnimal.KidFriendly = animal.KidFriendly;
-      updateAnimal.ShelterId = shelterId;
-
-      _context.Update(updateAnimal);
-      _context.SaveChanges();
-      return updateAnimal;
+    public void UpdateAnimal(string shelterId, string animalId, Shelter.shared.Animal animal) {
+      _context.Animals.ReplaceOne(x => x.ShelterId == shelterId && x.Id == animalId, animal); 
     }
 
     public Dog AddDog(string shelterId, Shelter.shared.Dog dog) {
@@ -104,21 +94,13 @@ namespace Shelter.MVC
       _context.Animals.DeleteOne(x => x.ShelterId == shelterId && x.Id == animalId);
     }
 
-    public Shelter.shared.Shelter UpdateShelter(string shelterId, Shelter.shared.Shelter shelter) {
-      Shelter.shared.Shelter updateShelter =  _context.Shelters.FirstOrDefault(x => x.Id == shelterId);
-
-      updateShelter.Name = shelter.Name;
-
-      _context.Update(updateShelter);
-      _context.SaveChanges();
-      return updateShelter;
+    public void UpdateShelter(string shelterId, Shelter.shared.Shelter shelter) {
+      _context.Shelters.ReplaceOne(x => x.Id == shelterId, shelter);
     }
 
     public Shelter.shared.Shelter AddShelter(Shelter.shared.Shelter shelter) {
-      Shelter.shared.Shelter newShelter = new Shelter.shared.Shelter{ Name = shelter.Name };
-      _context.Add(newShelter);
-      _context.SaveChanges();
-      return newShelter;
+      _context.Shelters.InsertOne(shelter);
+      return shelter;
     }
 
     public void DeleteShelter(string shelterId) {
@@ -147,15 +129,8 @@ namespace Shelter.MVC
       return administrator;
     }
 
-    public Employee UpdateEmployee(string shelterId, string employeeId, Shelter.shared.Employee employee) {
-      Employee updateEmployee =  _context.Employees.FirstOrDefault(x => x.ShelterId == shelterId && x.Id == employeeId);
-
-      updateEmployee.Name = employee.Name;
-      updateEmployee.ShelterId = shelterId;
-
-      _context.Update(updateEmployee);
-      _context.SaveChanges();
-      return updateEmployee;
+    public void UpdateEmployee(string shelterId, string employeeId, Shelter.shared.Employee employee) {
+      _context.Employees.ReplaceOne(x => x.ShelterId == shelterId && x.Id == employeeId, employee);
     }
 
     public void DeleteEmployee(string shelterId, string employeeId) {
