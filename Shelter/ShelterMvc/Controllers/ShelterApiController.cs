@@ -33,23 +33,23 @@ namespace ShelterMvc.Controllers
             
         }
 
-        // /// <summary>
-        // /// Get a full list of the shelters including their respective animals and employees.
-        // /// </summary>
-        // [HttpGet("full")]
-        // public IActionResult GetAllSheltersFull(){
-        //     return Json(_dataAccess.GetAllSheltersFull());
-        // }
+        /// <summary>
+        /// Get a full list of the shelters including their respective animals and employees.
+        /// </summary>
+        [HttpGet("full")]
+        public IActionResult GetAllSheltersFull(){
+            return Json(_dataAccess.GetAllSheltersFull());
+        }
 
-        // /// <summary>
-        // /// Get a single shelter by it's ID including it's animals and employees.
-        // /// </summary>
-        // /// <param name="id">The ID of the shelter you're looking for</param>
-        // [HttpGet("{id}")]
-        // public IActionResult GetShelter(string id){
-        //     var shelter = _dataAccess.GetShelterById(id);
-        //     return shelter == default(Shelter.shared.Shelter) ? (IActionResult)NotFound() : Ok(shelter);
-        // }
+        /// <summary>
+        /// Get a single shelter by it's ID including it's animals and employees.
+        /// </summary>
+        /// <param name="id">The ID of the shelter you're looking for</param>
+        [HttpGet("{id}")]
+        public IActionResult GetShelter(string id){
+            var shelter = _dataAccess.GetShelterById(id);
+            return shelter == default(Shelter.shared.Shelter) ? (IActionResult)NotFound() : Ok(shelter);
+        }
 
         // /// <summary>
         // /// Get all animals from 1 shelter.
