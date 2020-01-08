@@ -38,12 +38,20 @@ namespace Shelter.shared
         Name = "MijnEersteShelter",
         Id = "507f1f77bcf86cd799439011",
         Animals = new List<Animal> {
-          new Dog() { Name = "Brutus", IsChecked = true, KidFriendly = true, Id = "507f1f77bcf86cd799439012" , ShelterId = "507f1f77bcf86cd799439011"},
-          new Cat() { Name = "Minoes", IsChecked = true, KidFriendly = true, Id = "507f1f77bcf86cd799439013" , ShelterId = "507f1f77bcf86cd799439011"},
-          new Cat() { Name = "pspspsps", IsChecked = true, KidFriendly = false, Id = "507f1f77bcf86cd799439014" , ShelterId = "507f1f77bcf86cd799439011"}
+
+          
+
         }
       };
+      var brutus = new Dog() { Name = "Brutus", IsChecked = true, KidFriendly = true, Id = "507f1f77bcf86cd799439012" , ShelterId = "507f1f77bcf86cd799439011"};
+      var minoes = new Cat() { Name = "Minoes", IsChecked = true, KidFriendly = true, Id = "507f1f77bcf86cd799439013" , ShelterId = "507f1f77bcf86cd799439011"};
+      var pspspsps = new Cat() { Name = "pspspsps", IsChecked = true, KidFriendly = false, Id = "507f1f77bcf86cd799439014" , ShelterId = "507f1f77bcf86cd799439011"};
       _context.Shelters.InsertOne(shelter);
+      _context.Animals.InsertOne(brutus);
+      _context.Animals.InsertOne(minoes);
+      _context.Animals.InsertOne(pspspsps);
+
     }
+
   }
 } 
