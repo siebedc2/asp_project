@@ -7,11 +7,11 @@ namespace Shelter.MVC
 {
   public interface IShelterDataAccess
   {
-    IMongoCollection<Shelter.shared.Shelter> GetAllShelters();
+    IEnumerable<Shelter.shared.Shelter> GetAllShelters();
     IMongoCollection<Shelter.shared.Shelter> GetAllSheltersFull();
     Shelter.shared.Shelter GetShelterById(string id);
 
-    // IMongoCollection<Animal> GetAnimals(string shelterId);
+    IEnumerable<Animal> GetAnimals(string shelterId);
     Animal GetAnimalByShelterAndId(string shelterId, string animalId);
 
     void UpdateAnimal(string shelterId, string animalId, Shelter.shared.Animal animal);
@@ -24,7 +24,7 @@ namespace Shelter.MVC
     Shelter.shared.Shelter AddShelter(Shelter.shared.Shelter shelter);
     void DeleteShelter(string shelterId);
 
-    // IMongoCollection<Employee> GetShelterEmployees(string shelterId);
+    IMongoCollection<Employee> GetShelterEmployees(string shelterId);
     Manager AddManager(string shelterId, Shelter.shared.Manager manager);
     Caretaker AddCaretaker(string shelterId, Shelter.shared.Caretaker caretaker);
     Administrator AddAdministrator(string shelterId, Shelter.shared.Administrator administrator);
@@ -41,9 +41,9 @@ namespace Shelter.MVC
             _context = db;
     }
 
-    public IMongoCollection<Shelter.shared.Shelter> GetAllShelters()
+    public IEnumerable<Shelter.shared.Shelter> GetAllShelters()
     {
-      return _context.Shelters;
+      return _context.Shelters.AsQueryable();
     }
 
     public IMongoCollection<Shelter.shared.Shelter> GetAllSheltersFull()
@@ -59,11 +59,11 @@ namespace Shelter.MVC
       return _context.Animals.Find<Animal>(x => x.ShelterId == shelterId && x.Id == animalId).FirstOrDefault();
     }
 
-    public IMongoCollection<Animal> GetAnimals(string shelterId)
+    public IEnumerable<Animal> GetAnimals(string shelterId)
     {
       var collection = _context.Animals;
       collection.Find<Animal>(x => x.Id == shelterId);
-      return collection;
+      return collection.AsQueryable();
     }
 
     public Shelter.shared.Shelter GetShelterById(string id)
