@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Shelter.shared;
 using MongoDB.Driver;
+using MongoDB.Bson;
 // using System.Threading.Tasks;
 namespace Shelter.MVC
 {
