@@ -49,9 +49,10 @@ namespace Shelter.MVC
 
     public IMongoCollection<Shelter.shared.Shelter> GetAllSheltersFull()
     {
-      return _context.Shelters
-        .Include(shelter => shelter.Animals)
-        .Include(shelter => shelter.Employees);
+      var collection = _context.Shelters;
+      collection.Aggregate().Lookup("Animals", "Id", "ShelterId", "Animals")
+      .Lookup("Employees", "Id", "ShelterId", "Employees");
+      return collection;
     }
 
     public Animal GetAnimalByShelterAndId(string shelterId, string animalId)
