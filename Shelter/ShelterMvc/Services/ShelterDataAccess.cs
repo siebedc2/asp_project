@@ -14,22 +14,22 @@ namespace Shelter.MVC
     IMongoCollection<Animal> GetAnimals(string shelterId);
     Animal GetAnimalByShelterAndId(string shelterId, string animalId);
 
-    Animal UpdateAnimal(string shelterId, string animalId, Shelter.shared.Animal animal);
+    void UpdateAnimal(string shelterId, string animalId, Shelter.shared.Animal animal);
     Dog AddDog(string shelterId, Shelter.shared.Dog dog);
     Cat AddCat(string shelterId, Shelter.shared.Cat cat);
     Other AddOther(string shelterId, Shelter.shared.Other other);
-    Animal DeleteAnimal(string shelterId, string animalId);
+    void DeleteAnimal(string shelterId, string animalId);
 
-    Shelter.shared.Shelter UpdateShelter(string shelterId, Shelter.shared.Shelter shelter);
+    void UpdateShelter(string shelterId, Shelter.shared.Shelter shelter);
     Shelter.shared.Shelter AddShelter(Shelter.shared.Shelter shelter);
-    Shelter.shared.Shelter DeleteShelter(string shelterId);
+    void DeleteShelter(string shelterId);
 
     IMongoCollection<Employee> GetShelterEmployees(string shelterId);
     Manager AddManager(string shelterId, Shelter.shared.Manager manager);
     Caretaker AddCaretaker(string shelterId, Shelter.shared.Caretaker caretaker);
     Administrator AddAdministrator(string shelterId, Shelter.shared.Administrator administrator);
-    Employee UpdateEmployee(string shelterId, string employeeId, Shelter.shared.Employee employee);
-    Employee DeleteEmployee(string shelterId, string employeeId);
+    void UpdateEmployee(string shelterId, string employeeId, Shelter.shared.Employee employee);
+    void DeleteEmployee(string shelterId, string employeeId);
   }
 
   public class ShelterDataAccess : IShelterDataAccess
