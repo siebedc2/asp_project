@@ -47,7 +47,7 @@ namespace Shelter.MVC
       return _context.Shelters;
     }
 
-    public IEnumerable<Shelter.shared.Shelter> GetAllSheltersFull()
+    public IMongoCollection<Shelter.shared.Shelter> GetAllSheltersFull()
     {
       return _context.Shelters
         .Include(shelter => shelter.Animals)
@@ -59,7 +59,7 @@ namespace Shelter.MVC
       return _context.Animals.Find<Animal>(x => x.ShelterId == shelterId && x.Id == animalId).FirstOrDefault();
     }
 
-    public IEnumerable<Animal> GetAnimals(string shelterId)
+    public IMongoCollection<Animal> GetAnimals(string shelterId)
     {
       return _context.Shelters
         .Include(shelter => shelter.Animals)
@@ -161,7 +161,7 @@ namespace Shelter.MVC
       return deleteShelter;
     }
 
-    public IEnumerable<Employee> GetShelterEmployees(string shelterId)
+    public IMongoCollection<Employee> GetShelterEmployees(string shelterId)
     {
       return _context.Shelters
         .Include(shelter => shelter.Employees)
