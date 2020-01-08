@@ -8,7 +8,7 @@ namespace Shelter.MVC
 {
   public interface IShelterDataAccess
   {
-    IEnumerable<Shelter.shared.Shelter> GetAllShelters();
+    IMongoCollection<Shelter.shared.Shelter> GetAllShelters();
     IEnumerable<Shelter.shared.Shelter> GetAllSheltersFull();
     Shelter.shared.Shelter GetShelterById(string id);
 
@@ -42,7 +42,7 @@ namespace Shelter.MVC
             _context = db;
     }
 
-    public IEnumerable<Shelter.shared.Shelter> GetAllShelters()
+    public IMongoCollection<Shelter.shared.Shelter> GetAllShelters()
     {
       return _context.Shelters;
     }
