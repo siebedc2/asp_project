@@ -83,6 +83,7 @@ namespace ShelterMvc
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
+            databaseInitializer.Initialize();
         }
     }
 }

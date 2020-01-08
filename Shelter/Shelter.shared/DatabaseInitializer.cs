@@ -36,11 +36,11 @@ namespace Shelter.shared
       var shelter = new Shelter()
       {
         Name = "MijnEersteShelter",
-        Id = "aa1",
+        Id = "507f1f77bcf86cd799439011",
         Animals = new List<Animal> {
-          new Dog() { Name = "Brutus", IsChecked = true, KidFriendly = true, Id = "a1" , ShelterId = "aa1"},
-          new Cat() { Name = "Minoes", IsChecked = true, KidFriendly = true, Id = "a2" , ShelterId = "aa1"},
-          new Cat() { Name = "pspspsps", IsChecked = true, KidFriendly = false, Id = "a3" , ShelterId = "aa1"}
+          new Dog() { Name = "Brutus", IsChecked = true, KidFriendly = true, Id = "507f1f77bcf86cd799439012" , ShelterId = "507f1f77bcf86cd799439011"},
+          new Cat() { Name = "Minoes", IsChecked = true, KidFriendly = true, Id = "507f1f77bcf86cd799439013" , ShelterId = "507f1f77bcf86cd799439011"},
+          new Cat() { Name = "pspspsps", IsChecked = true, KidFriendly = false, Id = "507f1f77bcf86cd799439014" , ShelterId = "507f1f77bcf86cd799439011"}
         }
       };
       _context.Shelters.InsertOne(shelter);
