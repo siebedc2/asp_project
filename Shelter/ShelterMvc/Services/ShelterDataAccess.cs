@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Shelter.shared;
 using MongoDB.Driver;
+using MongoDB.Bson;
 // using System.Threading.Tasks;
 namespace Shelter.MVC
 {
   public interface IShelterDataAccess
   {
-    IMongoCollection<Shelter.shared.Shelter> GetAllShelters();
+    Shelter.shared.Shelter GetAllShelters();
     IMongoCollection<Shelter.shared.Shelter> GetAllSheltersFull();
     Shelter.shared.Shelter GetShelterById(string id);
 
@@ -41,9 +42,9 @@ namespace Shelter.MVC
             _context = db;
     }
 
-    public IMongoCollection<Shelter.shared.Shelter> GetAllShelters()
+    public Shelter.shared.Shelter GetAllShelters()
     {
-      return _context.Shelters;
+      return _context.Shelters.Find<Shelter.shared.Shelter>(_ =>true).FirstOrDefault();
     }
 
     public IMongoCollection<Shelter.shared.Shelter> GetAllSheltersFull()
