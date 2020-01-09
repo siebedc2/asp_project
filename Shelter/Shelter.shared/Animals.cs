@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using MongoDB.Bson.Serialization.Attributes;
 
 
 namespace Shelter.shared {
+    [BsonKnownTypes(typeof(Dog), typeof(Cat), typeof(Other))]
     public class Animal : BaseDbClass {
         public string Name { get; set; }
         public DateTime DateOfBirth { get; set; }

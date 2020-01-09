@@ -1,9 +1,11 @@
     
 using System;
 using System.Collections.Generic;
+using MongoDB.Bson.Serialization.Attributes;
 
 
 namespace Shelter.shared{
+    [BsonKnownTypes(typeof(Manager), typeof(Caretaker), typeof(Administrator))]
     public class Employee : BaseDbClass
     
     {// Begin Employee
