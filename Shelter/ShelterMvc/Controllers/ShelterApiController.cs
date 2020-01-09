@@ -50,9 +50,10 @@ namespace ShelterMvc.Controllers
         /// </summary>
         /// <param name="id">The ID of the shelter you're looking for</param>
         [HttpGet("{id}")]
-        public IActionResult GetShelter(string id){
-            var shelter = _dataAccess.GetShelterById(id);
-            return shelter == default(Shelter.shared.Shelter) ? (IActionResult)NotFound() : Ok(shelter);
+        public List<Object> GetShelter(string id){
+            var data = _dataAccess.GetShelterById(id);
+            var result = data.ConvertAll(BsonTypeMapper.MapToDotNetValue);
+            return result;
         }
 
         /// <summary>

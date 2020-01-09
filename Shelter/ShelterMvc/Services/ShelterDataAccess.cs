@@ -10,7 +10,7 @@ namespace Shelter.MVC
   {
     IEnumerable<Shelter.shared.Shelter> GetAllShelters();
     List<BsonDocument> GetAllSheltersFull();
-    Shelter.shared.Shelter GetShelterById(string id);
+    List<BsonDocument> GetShelterById(string id);
 
     IEnumerable<Animal> GetAnimals(string shelterId);
     Animal GetAnimalByShelterAndId(string shelterId, string animalId);
@@ -66,9 +66,15 @@ namespace Shelter.MVC
       return data;
     }
 
-    public Shelter.shared.Shelter GetShelterById(string id)
+    public List<BsonDocument> GetShelterById(string id)
     {
-      return _context.Shelters.Find<Shelter.shared.Shelter>(x => x.Id == id).FirstOrDefault();
+      var collection = _context.Shelters;
+      var data = collection.Aggregate()
+      .Match(x => x.Id == id)
+      .Lookup("animals","id", "shelterId", "Animals")
+      .Lookup("employees","id", "shelterId", "Employees")
+      .ToList();
+      return data;
     }
 
     public void UpdateAnimal(string shelterId, string animalId, Shelter.shared.Animal animal) {
