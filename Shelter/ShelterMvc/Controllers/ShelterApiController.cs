@@ -122,6 +122,7 @@ namespace ShelterMvc.Controllers
         [HttpPost("{shelterId}/animals/dog")]
         public IActionResult AddDog(string shelterId, [FromBody]Shelter.shared.Dog dog)
         {
+          dog.ShelterId = shelterId;
           dog = _dataAccess.AddDog(shelterId, dog);
           return Ok(dog);
         }
@@ -137,7 +138,7 @@ namespace ShelterMvc.Controllers
         ///        "name": "Mimi",
         ///        "dateOfBirth": "2017-12-05T00:00:00",
         ///        "isChecked": true,
-        ///        "kidFriendly": true
+        ///        "kidFriendly": true,
         ///        "race": "House cat",
         ///        "declawed": true
         ///     }
@@ -146,6 +147,7 @@ namespace ShelterMvc.Controllers
         [HttpPost("{shelterId}/animals/cat")]
         public IActionResult AddCat(string shelterId, [FromBody]Shelter.shared.Cat cat)
         {
+          cat.ShelterId = shelterId;
           cat = _dataAccess.AddCat(shelterId, cat);
           return Ok(cat);
         }
@@ -161,7 +163,7 @@ namespace ShelterMvc.Controllers
         ///        "name": "Bugs Bunny",
         ///        "dateOfBirth": "2017-12-05T00:00:00",
         ///        "isChecked": true,
-        ///        "kidFriendly": true
+        ///        "kidFriendly": true,
         ///        "kind": "bunny",
         ///        "description": "lightbrown bunny with hanging ears, eats carrots all the time"
         ///     }
@@ -170,6 +172,7 @@ namespace ShelterMvc.Controllers
         [HttpPost("{shelterId}/animals/other")]
         public IActionResult AddOther(string shelterId, [FromBody]Shelter.shared.Other other)
         {
+          other.ShelterId = shelterId;
           other = _dataAccess.AddOther(shelterId, other);
           return Ok(other);
         }
