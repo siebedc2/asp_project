@@ -9,7 +9,7 @@ namespace Shelter.MVC
   public interface IShelterDataAccess
   {
     IEnumerable<Shelter.shared.Shelter> GetAllShelters();
-    IEnumerable<Shelter.shared.Shelter> GetAllSheltersFull();
+    List<BsonDocument> GetAllSheltersFull();
     Shelter.shared.Shelter GetShelterById(string id);
 
     IEnumerable<Animal> GetAnimals(string shelterId);
@@ -47,12 +47,11 @@ namespace Shelter.MVC
       return _context.Shelters.AsQueryable();
     }
 
-    public IEnumerable<Shelter.shared.Shelter> GetAllSheltersFull()
+    public List<BsonDocument> GetAllSheltersFull()
     {
       var collection = _context.Shelters;
-      collection.Aggregate().Lookup("Animals", "Id", "ShelterId", "Animals")
-      .Lookup("Employees", "Id", "ShelterId", "Employees");
-      return collection.AsQueryable();
+      var data = collection.Aggregate().Lookup("animals","id", "shelterId", "Animals").ToList();
+      return data;
     }
 
     public Animal GetAnimalByShelterAndId(string shelterId, string animalId)

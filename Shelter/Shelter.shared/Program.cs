@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-
+using MongoDB.Driver;
 
 namespace Shelter.shared{
 public class Shelters {
-        public ICollection<Shelter> SheltersList {get; set;}
+        public IMongoCollection<Shelter> SheltersList {get; set;}
     }
 }

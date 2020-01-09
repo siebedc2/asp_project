@@ -9,7 +9,7 @@ using ShelterMvc.Models;
 using Shelter.shared;
 using Microsoft.EntityFrameworkCore;
 using Shelter.MVC;
-
+using MongoDB.Bson;
 namespace ShelterMvc.Controllers
 {
     [Route("/api/shelters")]
@@ -37,8 +37,12 @@ namespace ShelterMvc.Controllers
         /// Get a full list of the shelters including their respective animals and employees.
         /// </summary>
         [HttpGet("full")]
-        public IActionResult GetAllSheltersFull(){
-            return Json(_dataAccess.GetAllSheltersFull());
+        public List<Object> GetAllSheltersFull(){
+            var data = _dataAccess.GetAllSheltersFull();
+            var result = data.ConvertAll(BsonTypeMapper.MapToDotNetValue);
+
+
+            return result;
         }
 
         /// <summary>
