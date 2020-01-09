@@ -110,8 +110,8 @@ namespace Shelter.MVC
     public IEnumerable<Employee> GetShelterEmployees(string shelterId)
     {
       var collection = _context.Employees;
-      collection.Find<Employee>(x => x.Id == shelterId);
-      return collection.AsQueryable();
+      var data = collection.Find<Employee>(x => x.Id == shelterId).ToList();
+      return data;
     }
 
     public Manager AddManager(string shelterId, Shelter.shared.Manager manager) {
