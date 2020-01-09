@@ -110,7 +110,7 @@ namespace Shelter.MVC
     public IEnumerable<Employee> GetShelterEmployees(string shelterId)
     {
       var collection = _context.Employees;
-      var data = collection.Find<Employee>(x => x.Id == shelterId).ToList();
+      var data = collection.Find<Employee>(x => x.ShelterId == shelterId).ToList();
       return data;
     }
 
