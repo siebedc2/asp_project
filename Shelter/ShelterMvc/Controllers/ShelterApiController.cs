@@ -113,7 +113,7 @@ namespace ShelterMvc.Controllers
         ///        "name": "Loena",
         ///        "dateOfBirth": "2017-12-05T00:00:00",
         ///        "isChecked": true,
-        ///        "kidFriendly": true
+        ///        "kidFriendly": true,
         ///        "race": "Corgi",
         ///        "barker": false
         ///     }
