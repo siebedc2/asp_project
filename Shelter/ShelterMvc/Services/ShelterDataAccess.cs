@@ -61,6 +61,12 @@ namespace Shelter.MVC
                 shelter.Animals.Remove(animal);
               }
           }
+          foreach (var emp in shelter.Employees.ToList())
+          {
+              if(emp.ShelterId != shelter.Id){
+                shelter.Employees.Remove(emp);
+              }
+          }
       }
       return data;
     }
@@ -91,6 +97,12 @@ namespace Shelter.MVC
           {
               if(animal.ShelterId != id){
                 shelter.Animals.Remove(animal);
+              }
+          }
+          foreach (var emp in shelter.Employees.ToList())
+          {
+              if(emp.ShelterId != id){
+                shelter.Employees.Remove(emp);
               }
           }
       }
