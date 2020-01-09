@@ -62,8 +62,8 @@ namespace Shelter.MVC
     public IEnumerable<Animal> GetAnimals(string shelterId)
     {
       var collection = _context.Animals;
-      collection.Find<Animal>(x => x.Id == shelterId);
-      return collection.AsQueryable();
+      var data = collection.Find<Animal>(x => x.ShelterId == shelterId).ToList();
+      return data;
     }
 
     public Shelter.shared.Shelter GetShelterById(string id)
