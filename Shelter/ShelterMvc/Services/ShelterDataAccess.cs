@@ -9,8 +9,8 @@ namespace Shelter.MVC
   public interface IShelterDataAccess
   {
     IEnumerable<Shelter.shared.Shelter> GetAllShelters();
-    List<BsonDocument> GetAllSheltersFull();
-    List<BsonDocument> GetShelterById(string id);
+    List<Shelter.shared.Shelter> GetAllSheltersFull();
+    List<Shelter.shared.Shelter> GetShelterById(string id);
 
     IEnumerable<Animal> GetAnimals(string shelterId);
     Animal GetAnimalByShelterAndId(string shelterId, string animalId);
@@ -47,10 +47,12 @@ namespace Shelter.MVC
       return _context.Shelters.AsQueryable();
     }
 
-    public List<BsonDocument> GetAllSheltersFull()
+    public List<Shelter.shared.Shelter> GetAllSheltersFull()
     {
       var collection = _context.Shelters;
-      var data = collection.Aggregate().Lookup("animals","id", "shelterId", "Animals").Lookup("employees","id", "shelterId", "Employees").ToList();
+      var data = collection.Aggregate()
+      .Lookup<Shelter.shared.Shelter, Shelter.shared.Shelter>("animals","id", "shelterId", "Animals")
+      .Lookup<Shelter.shared.Shelter, Shelter.shared.Shelter>("employees","id", "shelterId", "Employees").ToList();
       return data;
     }
 
@@ -66,13 +68,13 @@ namespace Shelter.MVC
       return data;
     }
 
-    public List<BsonDocument> GetShelterById(string id)
+    public List<Shelter.shared.Shelter> GetShelterById(string id)
     {
       var collection = _context.Shelters;
       var data = collection.Aggregate()
       .Match(x => x.Id == id)
-      .Lookup("animals","id", "shelterId", "Animals")
-      .Lookup("employees","id", "shelterId", "Employees")
+      .Lookup<Shelter.shared.Shelter, Shelter.shared.Shelter>("animals","id", "shelterId", "Animals")
+      .Lookup<Shelter.shared.Shelter, Shelter.shared.Shelter>("employees","id", "shelterId", "Employees")
       .ToList();
       return data;
     }

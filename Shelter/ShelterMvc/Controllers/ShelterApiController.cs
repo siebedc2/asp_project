@@ -37,12 +37,10 @@ namespace ShelterMvc.Controllers
         /// Get a full list of the shelters including their respective animals and employees.
         /// </summary>
         [HttpGet("full")]
-        public List<Object> GetAllSheltersFull(){
+        public List<Shelter.shared.Shelter> GetAllSheltersFull(){
             var data = _dataAccess.GetAllSheltersFull();
-            var result = data.ConvertAll(BsonTypeMapper.MapToDotNetValue);
 
-
-            return result;
+            return data;
         }
 
         /// <summary>
@@ -50,10 +48,9 @@ namespace ShelterMvc.Controllers
         /// </summary>
         /// <param name="id">The ID of the shelter you're looking for</param>
         [HttpGet("{id}")]
-        public List<Object> GetShelter(string id){
+        public List<Shelter.shared.Shelter> GetShelter(string id){
             var data = _dataAccess.GetShelterById(id);
-            var result = data.ConvertAll(BsonTypeMapper.MapToDotNetValue);
-            return result;
+            return data;
         }
 
         /// <summary>
