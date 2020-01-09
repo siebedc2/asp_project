@@ -50,7 +50,7 @@ namespace Shelter.MVC
     public List<BsonDocument> GetAllSheltersFull()
     {
       var collection = _context.Shelters;
-      var data = collection.Aggregate().Lookup("animals","id", "shelterId", "Animals").ToList();
+      var data = collection.Aggregate().Lookup("animals","id", "shelterId", "Animals").Lookup("employees","id", "shelterId", "Employees").ToList();
       return data;
     }
 
