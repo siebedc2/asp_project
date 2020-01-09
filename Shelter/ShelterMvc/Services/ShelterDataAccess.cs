@@ -15,7 +15,7 @@ namespace Shelter.MVC
     IEnumerable<Animal> GetAnimals(string shelterId);
     Animal GetAnimalByShelterAndId(string shelterId, string animalId);
 
-    void UpdateAnimal(string shelterId, string animalId, Shelter.shared.Animal animal);
+    Animal UpdateAnimal(string shelterId, string animalId, Shelter.shared.Animal animal);
     Dog AddDog(string shelterId, Shelter.shared.Dog dog);
     Cat AddCat(string shelterId, Shelter.shared.Cat cat);
     Other AddOther(string shelterId, Shelter.shared.Other other);
@@ -97,8 +97,22 @@ namespace Shelter.MVC
       return data;
     }
 
-    public void UpdateAnimal(string shelterId, string animalId, Shelter.shared.Animal animal) {
-      _context.Animals.ReplaceOne(x => x.ShelterId == shelterId && x.Id == animalId, animal); 
+    public Animal UpdateAnimal(string shelterId, string animalId, Shelter.shared.Animal animal) {
+      Animal reference =_context.Animals.Find<Animal>(x => x.ShelterId == shelterId && x.Id == animalId).FirstOrDefault();
+      if(animal.Name != reference.Name){
+        reference.Name = animal.Name;
+      }
+      if(animal.DateOfBirth != reference.DateOfBirth){
+        reference.DateOfBirth = animal.DateOfBirth;
+      }
+      if(animal.IsChecked != reference.IsChecked){
+        reference.IsChecked = animal.IsChecked;
+      }
+      if(animal.KidFriendly != reference.KidFriendly){
+        reference.KidFriendly = animal.KidFriendly;
+      }
+      _context.Animals.ReplaceOne(x => x.ShelterId == shelterId && x.Id == animalId, reference); 
+      return reference;
     }
 
     public Dog AddDog(string shelterId, Shelter.shared.Dog dog) {
