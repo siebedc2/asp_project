@@ -53,6 +53,15 @@ namespace Shelter.MVC
       var data = collection.Aggregate()
       .Lookup<Shelter.shared.Shelter, Shelter.shared.Shelter>("animals","id", "shelterId", "Animals")
       .Lookup<Shelter.shared.Shelter, Shelter.shared.Shelter>("employees","id", "shelterId", "Employees").ToList();
+      foreach (var shelter in data)
+      {
+          foreach (var animal in shelter.Animals.ToList())
+          {
+              if(animal.ShelterId != shelter.Id){
+                shelter.Animals.Remove(animal);
+              }
+          }
+      }
       return data;
     }
 
@@ -76,6 +85,15 @@ namespace Shelter.MVC
       .Lookup<Shelter.shared.Shelter, Shelter.shared.Shelter>("animals","id", "shelterId", "Animals")
       .Lookup<Shelter.shared.Shelter, Shelter.shared.Shelter>("employees","id", "shelterId", "Employees")
       .ToList();
+      foreach (var shelter in data)
+      {
+          foreach (var animal in shelter.Animals.ToList())
+          {
+              if(animal.ShelterId != id){
+                shelter.Animals.Remove(animal);
+              }
+          }
+      }
       return data;
     }
 
