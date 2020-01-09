@@ -264,6 +264,7 @@ namespace ShelterMvc.Controllers
         [HttpPost("{shelterId}/employees/manager")]
         public IActionResult AddManager(string shelterId, [FromBody]Shelter.shared.Manager manager)
         {
+          manager.ShelterId = shelterId;
           manager = _dataAccess.AddManager(shelterId, manager);
           return Ok(manager);
         }
@@ -284,6 +285,7 @@ namespace ShelterMvc.Controllers
         [HttpPost("{shelterId}/employees/caretaker")]
         public IActionResult AddCaretaker(string shelterId, [FromBody]Shelter.shared.Caretaker caretaker)
         {
+          caretaker.ShelterId = shelterId;
           caretaker = _dataAccess.AddCaretaker(shelterId, caretaker);
           return Ok(caretaker);
         }
@@ -303,6 +305,7 @@ namespace ShelterMvc.Controllers
         [HttpPost("{shelterId}/employees/administrator")]
         public IActionResult AddAdministrator(string shelterId, [FromBody]Shelter.shared.Administrator administrator)
         {
+          administrator.ShelterId = shelterId;
           administrator = _dataAccess.AddAdministrator(shelterId, administrator);
           return Ok(administrator);
         }
