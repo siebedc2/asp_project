@@ -194,7 +194,7 @@ namespace ShelterMvc.Controllers
         /// Sample request:
         ///
         ///     {
-        ///        "name": "Mechels Asiel",
+        ///        "name": "Mechels Asiel"
         ///     }
         ///
         /// </remarks>
@@ -213,7 +213,7 @@ namespace ShelterMvc.Controllers
         /// Sample request:
         ///
         ///     {
-        ///        "name": "Just Another Shelter",
+        ///        "name": "Just Another Shelter"
         ///     }
         ///
         /// </remarks>
@@ -255,7 +255,7 @@ namespace ShelterMvc.Controllers
         ///
         ///     {
         ///        "name": "John Doe",
-        ///        "licensedManager": true,
+        ///        "licensedManager": true
         ///     }
         ///
         /// </remarks>
@@ -276,7 +276,7 @@ namespace ShelterMvc.Controllers
         ///
         ///     {
         ///        "name": "Jane Doe",
-        ///        "fixedContract": false,
+        ///        "fixedContract": false
         ///     }
         ///
         /// </remarks>
@@ -297,7 +297,8 @@ namespace ShelterMvc.Controllers
         ///
         ///     {
         ///        "name": "Marcel Cyfer",
-        ///        "digitalAdministration": true,
+        ///        "digitalAdministration": true
+        ///     }
         ///
         /// </remarks>
         [HttpPost("{shelterId}/employees/administrator")]
@@ -318,13 +319,15 @@ namespace ShelterMvc.Controllers
         /// Sample request:
         ///
         ///     {
-        ///        "name": "Jane Doe",
+        ///        "name": "Jane Doe"
         ///     }
         ///
         /// </remarks>
         [HttpPut("{shelterId}/employees/{employeeId}")]
         public IActionResult UpdateEmployee(string shelterId, string employeeId, [FromBody]Shelter.shared.Employee employee)
         {
+          employee.Id = employeeId;
+          employee.ShelterId = shelterId;
           _dataAccess.UpdateEmployee(shelterId, employeeId, employee);
           return Ok(employee);
         }
