@@ -5,15 +5,13 @@
   - [Domainmodel](#domainmodel)
 
 We gaan een aanzet geven voor de "grote oefening".
+## MongoDB ##
 
-## Aanmaken projectstructuur ##
-
-- `mkdir <NAAM>.Shelter`, bv `RafCeuls.Shelter`
-- Navigeer naar die subdirectory
-- Maak een nieuw project aan: `dotnet new console -o <Naam>.Shelter.Shared`
-- Open deze folder in je editor.
-
-Dit project gaat dienen voor onze "gedeelde" code. Maak hierin een folder aan voor het domeinmodel. Je namespace gaat `<Name>.Shelter.Shared.Domain` zijn.
+Om dit project te runnen moet je MongoDB geïnstalleerd hebben op je lokale machine.
+- Zie hier: https://docs.mongodb.com/manual/installation/
+De lokale Mongo instantie moet opgezet worden op 
+> mongodb://localhost:27017
+Dit is de default port voor MongoDB. Eens je het project opstart met "dotnet run" zal er een database "ShelterDB" aangemaakt worden. Je kan deze database bekijken in MongoDB atlas of Robo3T.
 
 ## Domainmodel ##
 
