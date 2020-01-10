@@ -20,8 +20,6 @@ Swagger documentatie kan je vinden op de /swagger url na het runnen van het proj
 
 ## Domainmodel ##
 
-> Hou rekening met de namespace! Je kan dit model voorlopig testen door de `Program.cs` wat objecten te laten aanmaken; later gaan we deze integreren via ASP.NET.
-
 - Een dierenasiel (`Shelter`) heeft een lijst van dieren (`Animals`).
 - Een dierenasiel heeft medewerkers (`Employees`).
 - Het systeem kent de volgende rollen/medewerkers: `Manager`, `Caretaker`, `Administrator`.
