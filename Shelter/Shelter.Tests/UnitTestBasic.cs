@@ -38,6 +38,22 @@ namespace Shelter.Tests
 
         }
 
+        [Test]
+        public void Test_GetOneShelter()
+        {
+        var shelter = new List<Shelter.shared.Shelter>()
+        {
+            
+        };
+
+        _mockedDataAccess.Setup(x => x.GetShelterById("507f1f77bcf86cd799439011")).Returns(shelter);
+
+        var result = _controller.GetShelter("507f1f77bcf86cd799439011");
+
+        Assert.IsInstanceOf(typeof(List<Shelter.shared.Shelter>), result);
+        Assert.AreEqual(((List<Shelter.shared.Shelter>)result), shelter);
+        }   
+
 
     }
 }
