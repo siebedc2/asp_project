@@ -10,8 +10,11 @@
 
 Om dit project te runnen moet je MongoDB geïnstalleerd hebben op je lokale machine.
 - Zie hier: https://docs.mongodb.com/manual/installation/
+
 De lokale Mongo instantie moet opgezet worden op 
+
 > mongodb://localhost:27017
+
 Dit is de default port voor MongoDB. Eens je het project opstart met "dotnet run" zal er een database "ShelterDB" aangemaakt worden. Je kan deze database bekijken in MongoDB atlas of Robo3T.
 
 
